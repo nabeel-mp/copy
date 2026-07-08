@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile | Doorcarts</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9fc",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#616363",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eeeef0",
+                        "on-tertiary-container": "#bfc2c5",
+                        "surface-dim": "#dadadc",
+                        "on-surface-variant": "#434653",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-surface": "#1a1c1e",
+                        "inverse-primary": "#b0c6ff",
+                        "tertiary-container": "#4c5053",
+                        "surface-container-highest": "#e2e2e5",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-primary-fixed-variant": "#00429b",
+                        "secondary": "#5d5f5f",
+                        "outline-variant": "#c3c6d5",
+                        "surface-variant": "#e2e2e5",
+                        "surface-bright": "#f9f9fc",
+                        "inverse-surface": "#2f3133",
+                        "primary": "#00357f",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e0e3e6",
+                        "surface-container-low": "#f3f3f6",
+                        "on-tertiary-fixed-variant": "#43474a",
+                        "on-background": "#1a1c1e",
+                        "secondary-container": "#dfe0e0",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#a9c1ff",
+                        "on-primary-fixed": "#001945",
+                        "tertiary": "#35393c",
+                        "surface": "#f9f9fc",
+                        "inverse-on-surface": "#f0f0f3",
+                        "primary-fixed": "#d9e2ff",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "primary-container": "#004aad",
+                        "outline": "#737784",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "tertiary-fixed-dim": "#c3c7ca",
+                        "surface-tint": "#215abd",
+                        "on-secondary-fixed-variant": "#454747",
+                        "surface-container-high": "#e8e8ea",
+                        "on-tertiary-fixed": "#181c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "12px",
+                        "stack-md": "20px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "container-padding": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9fc;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .profile-sheet {
+            border-radius: 40px 40px 0 0;
+            margin-top: -40px;
+        }
+        .bento-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-lg text-on-surface">
+<!-- Top AppBar (Navigation Anchor) -->
+<header class="w-full top-0 sticky z-50 bg-primary dark:bg-primary-container shadow-md flex justify-between items-center px-container-padding h-16 transition-colors duration-200">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-primary dark:text-on-primary-container hover:bg-primary-container/20 p-2 rounded-full transition-colors">menu</button>
+<h1 class="font-display-lg text-[24px] font-extrabold text-on-primary dark:text-on-primary-container">Doorcarts</h1>
+</div>
+<div class="flex items-center">
+<button class="material-symbols-outlined text-on-primary dark:text-on-primary-container hover:bg-primary-container/20 p-2 rounded-full transition-colors">search</button>
+</div>
+</header>
+<main class="min-h-screen pb-32">
+<!-- Hero Section / Identity Header -->
+<section class="h-64 bg-primary flex flex-col items-center pt-8 relative">
+<div class="relative z-10 group">
+<div class="w-28 h-28 rounded-full border-4 border-on-primary overflow-hidden shadow-xl bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional close-up of Arjun Malhotra, a South Asian man in his 30s wearing a bright yellow construction hard hat and a high-visibility orange safety vest. He is smiling confidently into the camera against a blurred backdrop of a modern architectural project. The lighting is crisp and natural, emphasizing a high-end corporate service aesthetic with clean lines and vibrant primary colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUhMaqhnccq6X1olCuQIzcOM5kpxTYvYnC2ikAQ065pI8QGntNI44gBEHu4kWQ2Vu_AB82VqY3ouqsTDUOBo1XCBD2Vr1fokTdRzq4T3AkVJuU0xGD7cLTrYtuVVvTq0onwJr0Jte1WiWVTt1ufV8iwxdGwjRf-8nU79yJ1SJx4zxuYaeZzZf14wZR7RVfJki8Uh8ZzkqK059nO00RfUu8Ih3QCTsUjxcvXq7VjAqCk-RG6E1uNzP6EzC90gU4zoIOygmnxCKrweR9"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary-container text-on-primary-container p-1.5 rounded-full border-2 border-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+</section>
+<!-- Content Canvas (Profile Sheet) -->
+<section class="profile-sheet relative z-20 bg-background px-container-padding pt-8 min-h-screen">
+<!-- Basic Identity -->
+<div class="text-center mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Arjun Malhotra</h2>
+<div class="flex items-center justify-center gap-2 mt-1">
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-0.5 rounded-full font-label-md text-label-md">Build Master</span>
+<span class="text-primary font-bold text-label-md">Pro Member</span>
+</div>
+<p class="text-on-surface-variant font-body-sm mt-4 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                    +91 98765 43210
+                </p>
+<p class="text-on-surface-variant font-body-sm mt-1 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                    arjun.builds@email.com
+                </p>
+</div>
+<!-- Profile Actions Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Business Details Card -->
+<div class="bento-card bg-surface-container-low p-5 rounded-3xl flex flex-col gap-4 border border-outline-variant/30">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">business_center</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">Business Details</h3>
+</div>
+<button class="material-symbols-outlined text-outline">edit</button>
+</div>
+<div class="space-y-3 pt-2">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Company Name</p>
+<p class="font-body-lg font-semibold text-primary">Malhotra Foundations &amp; Co.</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">GSTIN</p>
+<p class="font-body-lg font-semibold">07AAACR1234F1Z5</p>
+</div>
+</div>
+</div>
+<!-- Identity Verification Card -->
+<div class="bento-card bg-surface-container-low p-5 rounded-3xl flex flex-col gap-4 border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">Identity Verification</h3>
+</div>
+<div class="flex flex-col gap-3 mt-auto">
+<div class="flex items-center justify-between p-3 bg-on-primary rounded-2xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-success text-[#006a60]">check_circle</span>
+<span class="font-body-sm font-medium">Aadhaar Verified</span>
+</div>
+<span class="text-label-sm text-on-surface-variant">ID: 88291</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-on-primary rounded-2xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#006a60]">check_circle</span>
+<span class="font-body-sm font-medium">Professional License</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Address Book (Full Width in Mobile) -->
+<div class="md:col-span-2 bento-card bg-surface-container-low p-5 rounded-3xl border border-outline-variant/30">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">Address Book</h3>
+</div>
+<button class="text-primary font-bold text-label-md px-4 py-2 hover:bg-primary/5 rounded-full transition-colors">Add New</button>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-4 p-4 bg-on-primary rounded-2xl shadow-sm border border-outline-variant/10">
+<span class="material-symbols-outlined text-outline mt-1">home</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-bold text-on-surface">Registered Office</p>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] uppercase font-bold">Default</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+                                    422, Sector 15, Global Business Hub,<br/>
+                                    Gurugram, Haryana - 122001
+                                </p>
+</div>
+<button class="material-symbols-outlined text-outline text-[20px]">more_vert</button>
+</div>
+</div>
+</div>
+<!-- Settings Links -->
+<div class="md:col-span-2 space-y-2 mt-4">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-highest/30 rounded-2xl active:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">history</span>
+<span class="font-body-lg font-medium">Order History</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-highest/30 rounded-2xl active:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">payments</span>
+<span class="font-body-lg font-medium">Payment Methods</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-highest/30 rounded-2xl active:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-3 text-error">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-lg font-bold">Logout</span>
+</div>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Shell Control) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-dim shadow-lg border-t border-outline-variant dark:border-outline flex justify-around items-center h-20 px-4 pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-label-md text-label-md">Services</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</button>
+<!-- ACTIVE ITEM: Account (Contextual Mapping) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for profile interaction
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.classList.add('scale-[0.98]', 'bg-surface-container-high');
+            });
+            card.addEventListener('touchend', function() {
+                this.classList.remove('scale-[0.98]', 'bg-surface-container-high');
+            });
+        });
+
+        // Simple visibility observer for scroll header transparency
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-primary/95', 'backdrop-blur-md');
+            } else {
+                header.classList.remove('bg-primary/95', 'backdrop-blur-md');
+            }
+        });
+    </script>
+</body></html>

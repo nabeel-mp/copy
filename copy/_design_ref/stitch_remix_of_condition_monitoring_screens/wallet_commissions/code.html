@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wallet &amp; Commissions - Doorcarts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c3c6d5",
+                    "surface": "#f9f9fc",
+                    "surface-tint": "#215abd",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0c6ff",
+                    "error-container": "#ffdad6",
+                    "background": "#f9f9fc",
+                    "on-surface": "#1a1c1e",
+                    "surface-dim": "#dadadc",
+                    "outline": "#737784",
+                    "secondary-fixed": "#e2e2e2",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#c3c7ca",
+                    "primary": "#00357f",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#181c1e",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2f3133",
+                    "surface-bright": "#f9f9fc",
+                    "on-tertiary-container": "#bfc2c5",
+                    "on-secondary-fixed-variant": "#454747",
+                    "inverse-on-surface": "#f0f0f3",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-background": "#1a1c1e",
+                    "primary-fixed": "#d9e2ff",
+                    "surface-variant": "#e2e2e5",
+                    "on-primary-container": "#a9c1ff",
+                    "surface-container-high": "#e8e8ea",
+                    "secondary-container": "#dfe0e0",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-tertiary-fixed-variant": "#43474a",
+                    "surface-container": "#eeeef0",
+                    "on-primary-fixed": "#001945",
+                    "secondary": "#5d5f5f",
+                    "primary-container": "#004aad",
+                    "surface-container-low": "#f3f3f6",
+                    "on-primary-fixed-variant": "#00429b",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#434653",
+                    "tertiary-container": "#4c5053",
+                    "tertiary": "#35393c",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "on-secondary-container": "#616363",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "12px",
+                    "container-padding": "24px",
+                    "stack-md": "20px",
+                    "gutter": "16px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      body {
+        background-color: #f9f9fc;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-lg text-on-surface mb-24 overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container shadow-md flex justify-between items-center px-container-padding h-16 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-primary-container/20 p-2 rounded-full transition-colors">menu</span>
+<h1 class="font-display-lg text-display-lg font-extrabold text-on-primary dark:text-on-primary-container">Doorcarts</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined cursor-pointer hover:bg-primary-container/20 p-2 rounded-full transition-colors">search</span>
+</div>
+</header>
+<main class="max-w-md mx-auto relative px-4 sm:px-6">
+<!-- Hero Balance Section -->
+<section class="mt-stack-md bg-primary rounded-3xl p-6 text-on-primary shadow-xl overflow-hidden relative group">
+<!-- Decorative background element -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary-container opacity-30 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-500"></div>
+<div class="relative z-10">
+<p class="font-label-md text-label-md opacity-80 mb-1">Total Available Balance</p>
+<h2 class="font-display-lg text-display-lg font-extrabold mb-6">$12,450.80</h2>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="glass-effect rounded-2xl p-4">
+<p class="font-label-sm text-label-sm opacity-70 mb-1">Wallet Balance</p>
+<p class="font-headline-sm text-headline-sm">$8,120.30</p>
+</div>
+<div class="glass-effect rounded-2xl p-4">
+<p class="font-label-sm text-label-sm opacity-70 mb-1">Commissions</p>
+<p class="font-headline-sm text-headline-sm">$4,330.50</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-on-primary text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">payments</span>
+                        Withdraw
+                    </button>
+<button class="flex-1 bg-primary-container border border-on-primary/20 text-on-primary font-bold py-4 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+                        Add Money
+                    </button>
+</div>
+</div>
+</section>
+<!-- Commissions Summary - Bento Style -->
+<section class="mt-8">
+<h3 class="font-headline-sm text-headline-sm mb-4 px-2">Commission Insights</h3>
+<div class="grid grid-cols-6 grid-rows-2 gap-3 h-48">
+<div class="col-span-3 row-span-2 bg-surface-container-high rounded-3xl p-5 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary mb-2" style="font-variation-settings: 'FILL' 1;">stars</span>
+<p class="font-label-md text-label-md text-on-surface-variant">Total Earned</p>
+</div>
+<p class="font-headline-md text-headline-md text-primary">$18,240</p>
+</div>
+<div class="col-span-3 row-span-1 bg-secondary-container rounded-3xl p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-sm">schedule</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm opacity-70">Pending</p>
+<p class="font-body-lg font-bold">$940.00</p>
+</div>
+</div>
+<div class="col-span-3 row-span-1 bg-primary-fixed rounded-3xl p-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm opacity-70">Paid Out</p>
+<p class="font-body-lg font-bold">$17,300</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Referral Card -->
+<section class="mt-8">
+<div class="bg-surface-container-highest rounded-3xl p-6 flex items-center justify-between overflow-hidden relative">
+<div class="relative z-10 w-2/3">
+<h4 class="font-headline-sm text-headline-sm mb-2">Build Together</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Refer a fellow contractor and earn 5% on their first bulk order.</p>
+<div class="flex items-center gap-2 bg-surface px-4 py-2 rounded-full w-fit border border-outline-variant">
+<span class="font-label-md text-label-md tracking-widest text-primary">DC-BUILD2024</span>
+<span class="material-symbols-outlined text-sm text-outline cursor-pointer active:scale-90 transition-transform">content_copy</span>
+</div>
+</div>
+<div class="absolute -right-4 top-0 h-full w-1/3 flex items-center">
+<img alt="Construction Tools" class="w-full h-4/5 object-cover rounded-2xl transform rotate-6 shadow-lg" data-alt="A close-up, high-angle shot of professional yellow construction helmets and high-quality blueprint scrolls resting on a clean concrete surface. The scene is illuminated with sharp, architectural lighting that highlights textures. The style is modern and professional, reflecting a reliable corporate identity for the construction industry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2P3XoK3e7ubgJBGjpJE4ZDl-uxRu-i9qTYTzfqC2rz0nFjVDZyaNrvTNAynwaEj2lRjLDQUqwXrKt1h1A5zJcO8q25a2HvU0fXnUrsmUznklMoB6XsTFQtXfP-7K1pvkjKYUwG8c_RyBLMsXIrFwPfheMJNq3pPXDo15y2fu8Ic7jBqHARiRyaA5eGvTejhA-gb-WhuIf8JYLijLC0Lw8Jdif40LeNgJxgMPd4JEHyXgEdxZVJTfzNKdWFJ49rc-z-_zuNMm7sPM"/>
+</div>
+</div>
+</section>
+<!-- Recent Transactions -->
+<section class="mt-8 pb-12">
+<div class="flex items-center justify-between mb-4 px-2">
+<h3 class="font-headline-sm text-headline-sm">Transactions</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Transaction Item -->
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-body-lg font-bold">Referral Commission</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Jun 12, 2024 • Project #8821</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg font-bold text-primary">+$124.50</p>
+<span class="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 rounded-md">Completed</span>
+</div>
+</div>
+<!-- Transaction Item -->
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined">outbox</span>
+</div>
+<div>
+<p class="font-body-lg font-bold">Withdrawal</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Jun 10, 2024 • Bank Transfer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg font-bold text-on-surface">-$2,000.00</p>
+<span class="text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-orange-700 px-2 py-0.5 rounded-md">Pending</span>
+</div>
+</div>
+<!-- Transaction Item -->
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<div>
+<p class="font-body-lg font-bold">Materials Purchase</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Jun 08, 2024 • Cement Bulk</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg font-bold text-on-surface">-$840.20</p>
+<span class="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 rounded-md">Completed</span>
+</div>
+</div>
+<!-- Transaction Item -->
+<div class="bg-surface-container-low p-4 rounded-2xl flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-body-lg font-bold">Referral Commission</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Jun 05, 2024 • Project #7992</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg font-bold text-primary">+$45.00</p>
+<span class="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-700 px-2 py-0.5 rounded-md">Completed</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-dim shadow-lg border-t border-outline-variant dark:border-outline flex justify-around items-center h-20 px-4 pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-label-md text-label-md">Services</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high p-2 rounded-xl transition-all">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.classList.add('scale-125');
+                setTimeout(() => this.classList.remove('scale-125'), 200);
+            });
+        });
+
+        // Copy code interaction
+        const copyIcon = document.querySelector('.material-symbols-outlined[content_copy]');
+        if(copyIcon) {
+            copyIcon.addEventListener('click', () => {
+                alert('Referral code copied to clipboard!');
+            });
+        }
+    </script>
+</body></html>

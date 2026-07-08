@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Doorcarts - Construction Materials</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&amp;family=Plus+Jakarta+Sans:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-primary-container": "#a9c1ff",
+                "on-primary": "#ffffff",
+                "on-secondary-fixed": "#1a1c1c",
+                "tertiary-fixed": "#e0e3e6",
+                "tertiary-fixed-dim": "#c3c7ca",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#c3c6d5",
+                "secondary-fixed": "#e2e2e2",
+                "surface-tint": "#215abd",
+                "inverse-primary": "#b0c6ff",
+                "on-tertiary-fixed-variant": "#43474a",
+                "tertiary-container": "#4c5053",
+                "on-surface-variant": "#434653",
+                "surface": "#f9f9fc",
+                "surface-bright": "#f9f9fc",
+                "primary-container": "#004aad",
+                "on-tertiary-container": "#bfc2c5",
+                "secondary": "#5d5f5f",
+                "on-tertiary": "#ffffff",
+                "surface-container-highest": "#e2e2e5",
+                "background": "#f9f9fc",
+                "primary-fixed-dim": "#b0c6ff",
+                "surface-container-low": "#f3f3f6",
+                "on-background": "#1a1c1e",
+                "secondary-container": "#dfe0e0",
+                "on-secondary-container": "#616363",
+                "secondary-fixed-dim": "#c6c6c7",
+                "surface-dim": "#dadadc",
+                "on-error": "#ffffff",
+                "inverse-on-surface": "#f0f0f3",
+                "surface-container": "#eeeef0",
+                "primary-fixed": "#d9e2ff",
+                "outline": "#737784",
+                "surface-container-high": "#e8e8ea",
+                "on-tertiary-fixed": "#181c1e",
+                "on-secondary-fixed-variant": "#454747",
+                "on-secondary": "#ffffff",
+                "on-primary-fixed": "#001945",
+                "on-error-container": "#93000a",
+                "inverse-surface": "#2f3133",
+                "tertiary": "#35393c",
+                "on-primary-fixed-variant": "#00429b",
+                "on-surface": "#1a1c1e",
+                "error": "#ba1a1a",
+                "error-container": "#ffdad6",
+                "primary": "#00357f",
+                "surface-variant": "#e2e2e5"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "16px",
+                "stack-sm": "12px",
+                "stack-md": "20px",
+                "base": "8px",
+                "container-padding": "24px"
+        },
+        "fontFamily": {
+                "label-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "display-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-sm": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-sm": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-sm": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-sm": [
+                        "10px",
+                        {
+                                "lineHeight": "14px",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: theme('colors.background');
+    color: theme('colors.on-background');
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-sm text-body-sm pb-24 md:pb-0">
+<!-- Navigation Drawer (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden" id="nav-drawer">
+<div class="absolute inset-0 bg-on-background/50 backdrop-blur-sm" onclick="document.getElementById('nav-drawer').classList.add('hidden')"></div>
+<div class="absolute left-0 top-0 h-full w-80 bg-surface shadow-xl rounded-r-3xl flex flex-col py-6 transition-transform transform -translate-x-full" id="drawer-content">
+<div class="px-6 mb-8 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-sm text-headline-sm overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a construction site manager wearing a hard hat, lit by warm morning sunlight. The setting is an active construction site with blurred scaffolding in the background. The mood is confident and reliable. The lighting is natural and bright, emphasizing professional trust within a modern construction environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpanVc5BDzYENi5rFN544EXlZDU-Q81OZgCNAP5CPR67b5OA9zU2Gp3Skjl_aj5UBcmv2Zp7FgAfNrsIk6oi5v8V644d1HUwKqim_GuaEL-D-cA1E7JXpURl3goe0Zb1xivaL4E6xdB0t3kSGeZxavuPXfNE9gZ9zWFBoee600u9O8D8AHMt_Bi1AziYCzpv7az4gsAVkK3Ul7n1So0iBrejVZioyQjF2JjAsRAmR8SRnPjX3U23th17qAN4uqXRiSa_WnIOyaces"/>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Build Master</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pro Member</p>
+<p class="font-label-sm text-label-sm text-outline">ID: 88291</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-low transition-all duration-300 ease-in-out mx-2 my-1 font-body-lg text-body-lg rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+              My Profile
+            </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-low transition-all duration-300 ease-in-out mx-2 my-1 font-body-lg text-body-lg rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+              Order History
+            </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-low transition-all duration-300 ease-in-out mx-2 my-1 font-body-lg text-body-lg rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+              Payment Methods
+            </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-surface-container-low transition-all duration-300 ease-in-out mx-2 my-1 font-body-lg text-body-lg rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+              Settings
+            </a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto px-6">
+<a class="flex items-center gap-4 py-3 text-error hover:bg-surface-container-low transition-all duration-300 ease-in-out mx-2 my-1 font-body-lg text-body-lg rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+          Logout
+        </a>
+</div>
+</div>
+</div>
+<script>
+    function openDrawer() {
+      const drawer = document.getElementById('nav-drawer');
+      const content = document.getElementById('drawer-content');
+      drawer.classList.remove('hidden');
+      setTimeout(() => content.classList.remove('-translate-x-full'), 10);
+    }
+  </script>
+<!-- TopAppBar -->
+<header class="bg-primary w-full top-0 sticky z-40 shadow-md">
+<div class="flex justify-between items-center px-container-padding h-16">
+<button class="text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors duration-200 flex items-center justify-center" onclick="openDrawer()">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-display-lg text-display-lg font-extrabold text-on-primary">Doorcarts</h1>
+<button class="text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-7xl mx-auto flex flex-col gap-stack-md pt-stack-sm pb-stack-md">
+<!-- Search Section -->
+<section class="px-container-padding">
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-on-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all shadow-sm font-body-lg text-body-lg" placeholder="Search construction materials..." type="text"/>
+</div>
+</section>
+<!-- Hero Slider Section -->
+<section class="px-container-padding overflow-hidden">
+<div class="flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-2">
+<div class="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-[40%] bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col">
+<div class="h-32 bg-primary-container relative">
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="A dramatic low-angle shot of stacked TMT steel bars gleaming under bright, professional studio lighting. The setting is a clean, modern warehouse environment reflecting a high-end logistics operation. The metallic textures are sharp and contrast against a soft, blurred industrial background. The overall tone is strong, reliable, and premium." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB-RmUC7qsluWrin_asD16l1DBU7uUvfBdnFrf_tidZYyzaqmN3xrNB3Mj_dLacREHJNB0bte_T6OYCGYchRoZ-hkBBHXAt0i3t3qcRBgjEbUwHphhPn-phh2QX8ZxoaxQeAfOKWRQ7eKJvmqZFDuo84GiY8VT_O4ONT5nqErGFEYYg3ighaWF_tjEEiYNcV_YXZiOap0UyXmSVpuW6nMnzJI8egCK3-RO9g8hCfOGuzFg0TahMqh2166S6AYuax91eYmQqhu3GhGg');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-on-primary">
+<h3 class="font-headline-sm text-headline-sm font-bold">10% Off TMT Steel</h3>
+<p class="font-body-sm text-body-sm opacity-90">Bulk orders only</p>
+</div>
+</div>
+</div>
+<div class="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-[40%] bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden flex flex-col">
+<div class="h-32 bg-secondary-container relative">
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="Pallets of cement bags neatly stacked in a vast, well-lit modern warehouse. The lighting is even and bright, casting soft shadows that highlight the volume and scale of the inventory. The setting conveys order, efficiency, and industrial readiness. A clean aesthetic with muted grey tones and subtle blue accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8L0uEm-JrusThui4Y52x1uustnJyTUPe8SyTYGoYydu9Q3OsoSwkTQTXbkrB1SvCgaWB6zfyXAXCl1-f6nDX8aPlRtJvROtzOCALVa0f6oP5FnYe4AwtMqVBAG7oHlOTL5ZCOdsZtLEv0N7toBL7du8Mqa-BIBnmwI_j0sW6Z-TOyTNOa3UwR0vqtj5-fDtW0Oz9DZZBpjsp9zYNEaDYQiV4Qa_LUQ8AxFYWGr2ZTwofhB4fI3x2plnYQB_Nu3fv1_OHkF40PHDU');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-on-primary">
+<h3 class="font-headline-sm text-headline-sm font-bold">Bulk Cement Deals</h3>
+<p class="font-body-sm text-body-sm opacity-90">Free site delivery</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Bento Grid -->
+<section class="px-container-padding">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-stack-sm">Categories</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<a class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-4 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors aspect-square" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Cement</span>
+</a>
+<a class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-4 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors aspect-square" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="foundation">foundation</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Steel &amp; Rebars</span>
+</a>
+<a class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-4 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors aspect-square" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Bricks &amp; Blocks</span>
+</a>
+<a class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-4 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors aspect-square" href="#">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="electrical_services">electrical_services</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Electricals</span>
+</a>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface fixed bottom-0 w-full z-50 rounded-t-xl shadow-lg border-t-0 flex justify-around items-center h-20 px-4 pb-safe pb-4 pt-2">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 transition-transform hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="construction" data-weight="fill" style="font-variation-settings: 'FILL' 1;">construction</span>
+<span class="font-label-sm text-label-sm">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform hover:bg-surface-container-high px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event_note">event_note</span>
+<span class="font-label-sm text-label-sm">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform hover:bg-surface-container-high px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform hover:bg-surface-container-high px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+</body></html>

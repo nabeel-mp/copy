@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure Payment - Doorcarts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f9f9fc",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "secondary": "#5d5f5f",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "background": "#f9f9fc",
+                    "outline-variant": "#c3c6d5",
+                    "on-surface-variant": "#434653",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "inverse-surface": "#2f3133",
+                    "on-secondary-container": "#616363",
+                    "surface": "#f9f9fc",
+                    "primary": "#00357f",
+                    "on-tertiary-fixed": "#181c1e",
+                    "tertiary-fixed-dim": "#c3c7ca",
+                    "surface-container-high": "#e8e8ea",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "secondary-container": "#dfe0e0",
+                    "on-tertiary-fixed-variant": "#43474a",
+                    "on-primary-fixed": "#001945",
+                    "on-background": "#1a1c1e",
+                    "primary-container": "#004aad",
+                    "error": "#ba1a1a",
+                    "surface-container": "#eeeef0",
+                    "surface-dim": "#dadadc",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#d9e2ff",
+                    "surface-container-highest": "#e2e2e5",
+                    "inverse-primary": "#b0c6ff",
+                    "tertiary-container": "#4c5053",
+                    "surface-container-low": "#f3f3f6",
+                    "on-primary-fixed-variant": "#00429b",
+                    "surface-variant": "#e2e2e5",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline": "#737784",
+                    "on-surface": "#1a1c1e",
+                    "on-tertiary-container": "#bfc2c5",
+                    "secondary-fixed": "#e2e2e2",
+                    "tertiary-fixed": "#e0e3e6",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#a9c1ff",
+                    "tertiary": "#35393c",
+                    "surface-tint": "#215abd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "20px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "stack-sm": "12px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Inter"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .payment-card-active {
+            border: 2px solid #00357f;
+            background-color: #f3f3f6;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen pb-40">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 shadow-md bg-primary flex justify-between items-center px-container-padding h-16">
+<div class="flex items-center gap-4">
+<button class="text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-display-lg font-extrabold text-on-primary">Doorcarts</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-md text-label-md text-on-primary uppercase tracking-wider">Secure</span>
+</div>
+</header>
+<main class="max-w-xl mx-auto px-container-padding mt-8">
+<!-- Order Summary Card -->
+<section class="bg-primary-container rounded-xl p-6 mb-8 text-on-primary-container shadow-sm overflow-hidden relative">
+
+<div class="relative z-10">
+<p class="font-label-md text-label-md uppercase opacity-80 mb-1">Total Amount Payable</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg font-extrabold">₹1,64,374</span>
+<span class="font-body-sm text-body-sm opacity-90">Inc. GST</span>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-on-primary-container/20 pt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-body-sm text-body-sm">Order ID: #DC-88291-JK</span>
+</div>
+<button class="text-on-primary-container font-label-md underline underline-offset-4">View Details</button>
+</div>
+</div>
+</section>
+<!-- Payment Methods Section -->
+<div class="space-y-6">
+<!-- Saved Methods -->
+<div>
+<h2 class="font-headline-sm text-headline-sm mb-4">Saved Methods</h2>
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-12 h-8 bg-surface-container flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-primary" data-icon="credit_card">credit_card</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold">HDFC Bank •••• 4242</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Expires 12/26</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- UPI Options -->
+<div>
+<h2 class="font-headline-sm text-headline-sm mb-4">UPI Payments</h2>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col items-center gap-2 text-center cursor-pointer hover:border-primary transition-colors">
+<div class="w-10 h-10 bg-[#4285F4]/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[#4285F4]" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<span class="font-label-md text-label-md">Google Pay</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col items-center gap-2 text-center cursor-pointer hover:border-primary transition-colors">
+<div class="w-10 h-10 bg-[#6739B7]/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[#6739B7]" data-icon="payments">payments</span>
+</div>
+<span class="font-label-md text-label-md">PhonePe</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col items-center gap-2 text-center cursor-pointer hover:border-primary transition-colors">
+<div class="w-10 h-10 bg-[#00BAF2]/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[#00BAF2]" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<span class="font-label-md text-label-md">Paytm</span>
+</div>
+</div>
+<div class="mt-4 px-1">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 text-body-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Enter UPI ID (e.g. user@bank)" type="text"/>
+</div>
+</div>
+<!-- More Options -->
+<div class="space-y-3">
+<h2 class="font-headline-sm text-headline-sm mb-4">Other Methods</h2>
+<!-- Cards -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="credit_card">credit_card</span>
+<span class="font-body-lg text-body-lg">Credit / Debit Cards</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Net Banking -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="account_balance">account_balance</span>
+<span class="font-body-lg text-body-lg">Net Banking</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- COD -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="local_shipping">local_shipping</span>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg">Cash on Delivery</span>
+<span class="text-[10px] text-error font-bold uppercase tracking-tighter">Verified Construction Site Only</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Trust Badges -->
+<section class="mt-12 mb-8 grid grid-cols-2 gap-4">
+<div class="bg-surface-container-high rounded-lg p-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="verified_user">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold">PCI-DSS</span>
+<span class="text-[10px] leading-tight text-on-surface-variant">Compliant Gateway</span>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-lg p-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="security">security</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold">256-BIT SSL</span>
+<span class="text-[10px] leading-tight text-on-surface-variant">Secure Encryption</span>
+</div>
+</div>
+</section>
+<!-- Contextual Visual -->
+<div class="rounded-3xl overflow-hidden shadow-lg h-48 relative mb-12">
+<img class="w-full h-full object-cover" data-alt="A professional architectural construction site at dusk with glowing warm lights and blue-toned structural beams. The scene conveys a sense of large-scale engineering excellence and reliability. Deep navy blue evening skies provide a high-contrast backdrop to the organized construction equipment, embodying the Pro-Service Blue brand aesthetic of Doorcarts. High-end professional photography style with cinematic lighting and deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFmK_6uIXRJhsy4NF0z1KPPN0cets41jLU9Wpq7I0onrDwOEMqVKsInhDjLwMlmJ6LcdXoaGT8i4hwY2AC-zVGECTZP5u7CuXQwMD94akPJyOUgCa57bqbxbwalff3cQDYId691MC0guW83LqtHdqaz6lzo-LHubiuIVXR7ErNWLF13yhHW-StO0xaahgnw7lYaYo16MBqZL3e9OqngFndlGZF2YzGsoo7SO4yseoxxwqoPWxjS_Tb8bPqiTibZAFJTLlI6lXF5-Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<p class="text-white font-body-sm text-body-sm italic">"Building India's infrastructure, one secure click at a time."</p>
+</div>
+</div>
+</main>
+<!-- Fixed Action Bar (The 'Pay Now' Area) -->
+<div class="fixed bottom-20 left-0 w-full bg-surface-bright shadow-[0_-8px_20px_rgba(0,0,0,0.05)] px-container-padding py-4 z-40">
+<div class="max-w-xl mx-auto flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">To be paid</span>
+<span class="font-headline-sm text-headline-sm text-primary">₹1,64,374</span>
+</div>
+<button class="flex-1 bg-primary text-on-primary font-headline-sm text-headline-sm py-4 rounded-xl flex items-center justify-center gap-3 active:scale-95 transition-all shadow-md" onclick="simulatePayment(this)">
+<span class="material-symbols-outlined" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+                Pay Now
+            </button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-dim flex justify-around items-center h-20 px-4 pb-safe shadow-lg border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-label-md text-label-md">Services</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</div>
+</nav>
+<script>
+        function simulatePayment(btn) {
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<span class="animate-spin material-symbols-outlined" data-icon="sync">sync</span> Processing...`;
+            btn.disabled = true;
+            btn.classList.add('opacity-80');
+
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span> Success!`;
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-green-600');
+                
+                // Visual feedback for the summary card
+                const summary = document.querySelector('section.bg-primary-container');
+                summary.classList.add('scale-105', 'ring-4', 'ring-green-500/20');
+                
+                setTimeout(() => {
+                    alert('Order #DC-88291-JK has been placed successfully. You will receive a confirmation SMS shortly.');
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                    btn.classList.add('bg-primary');
+                    btn.classList.remove('bg-green-600', 'opacity-80');
+                    summary.classList.remove('scale-105', 'ring-4', 'ring-green-500/20');
+                }, 1500);
+            }, 2500);
+        }
+
+        // Selection micro-interaction
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.bg-surface-container-lowest').forEach(c => c.classList.remove('ring-2', 'ring-primary', 'bg-primary/5'));
+                this.classList.add('ring-2', 'ring-primary', 'bg-primary/5');
+            });
+        });
+    </script>
+</body></html>

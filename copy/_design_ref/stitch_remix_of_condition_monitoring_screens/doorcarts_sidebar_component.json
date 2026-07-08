@@ -1,0 +1,26 @@
+[
+  {
+    "name": "NavigationDrawer",
+    "num_tab": "5",
+    "label_texts": ["My Profile", "Order History", "Settings", "Support", "Logout"],
+    "icons": ["person", "history", "settings", "contact_support", "logout"],
+    "header_type": "profile",
+    "header_layout": "left_align",
+    "avatar_alt": "Arjun Malhotra Profile",
+    "profile_title": "Arjun Malhotra",
+    "sub_text": "Premium Contractor",
+    "meta_text": "ID: DC-88291",
+    "style_bg_color": "bg-surface dark:bg-surface-dim",
+    "style_primary_color": "text-primary dark:text-primary-fixed",
+    "style_typography": "font-body-lg text-body-lg",
+    "style_brand_logo": "font-headline-md text-headline-md text-primary",
+    "style_component_shape": "h-full w-80 rounded-r-3xl",
+    "style_separation_logic": "border-r border-outline-variant",
+    "style_shadows_and_elevation": "shadow-2xl",
+    "style_active_navigation": "bg-primary-container text-on-primary-container rounded-full mx-2 my-1",
+    "style_inactive_navigation": "text-on-surface-variant mx-2 my-1",
+    "style_universal_hover": "hover:bg-surface-container-high",
+    "style_interactions": "transition-all duration-300",
+    "style_shell_layout": "flex flex-col h-full py-8"
+  }
+]

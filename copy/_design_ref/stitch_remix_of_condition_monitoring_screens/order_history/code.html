@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Doorcarts - My Orders</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .order-card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 53, 127, 0.05);
+        }
+        /* Custom scrollbar for chips */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright text-on-surface font-body-lg min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-container-highest shadow-sm dark:shadow-none flex justify-between items-center h-16 px-gutter">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-inverse-primary hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150">menu</button>
+<h1 class="font-headline-md text-headline-md font-extrabold text-primary dark:text-inverse-primary tracking-tight">My Orders</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-inverse-primary hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150">shopping_cart</button>
+</header>
+<main class="mt-16 px-container-padding pt-6 space-y-6">
+<!-- Filter Chips Section -->
+<div class="flex items-center gap-3 overflow-x-auto hide-scrollbar -mx-container-padding px-container-padding py-2">
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all active:scale-95">All</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-secondary-container transition-all active:scale-95">Ongoing</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-secondary-container transition-all active:scale-95">Completed</button>
+<button class="flex-shrink-0 px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-secondary-container transition-all active:scale-95">Cancelled</button>
+</div>
+<!-- Order List Section -->
+<div class="space-y-stack-md">
+<!-- Ongoing Order Card -->
+<div class="bg-surface-container-lowest p-stack-md rounded-[24px] order-card-shadow border border-primary/5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Oct 24, 2023 • #DC-8829</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-md text-label-md text-primary font-bold">Ongoing</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-sm text-headline-sm text-primary">$124.50</p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="flex -space-x-3 overflow-hidden">
+<img class="inline-block h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest object-cover" data-alt="A high-quality close-up photograph of fresh, vibrant vegetables including bell peppers and leafy greens, arranged professionally with soft morning lighting in a clean, high-end grocery setting. The aesthetic is modern and fresh, emphasizing reliability and premium quality with a bright, clean color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSMpH_LHOTr4wSIo7BYnmN659ni_X-zJUaUd4vrg01eCHY0rYG94-NH4itygcXMAqIh5TpsXpeyaVmcNbo-_k7k9JnvUU0LTqhNNdFmJXWBaWVq4LiQGsg18odYJtdU9LKiEc9rbQjFRpHsbFMhUZ0HFOyVfcUqFeBJmlTqe_5Mf3xkRkSdN2vPkcdR1_b_x1TgcY5EWQrbsbkh3RsdUHB1bz4y9pXaX3B0oY2yxYfKcngfWKKrsvZWOJA87tZLzXBrBzuhKbZwos"/>
+<img class="inline-block h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest object-cover" data-alt="A professional studio photograph of premium packaged organic snacks and health food products. The lighting is soft and diffuse, highlighting the clean design of the packaging. The scene conveys a sense of modern efficiency and high-quality logistics service, fitting the professional brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq_SyrDEsMdf2Hc9V9YiOcmDukq4D-nt1CSdZU-AgnSQQNGVHFfTEFjZw9YZZ2xazShILr6j_7I7VdYP1A7-BPPyOY_LVyxAHtp3KjWc8pjyh4CQA7w7nNpLK1tEdBr1NMS8QPwPdjFOEmSeipArj7ZKVcF1ecJsSIstUYUEpJJ9IrFdT2E9p29oMZUBxodpTxAbybVtjG8v4Ej9L_W0bIr8UAzmkZVMe6r5Tcre_X99j0uWAtr6wJ-UH3NwFGk3rs2_EQTpE1UIU"/>
+<div class="flex items-center justify-center h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">+2</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Arriving in <span class="font-bold text-primary">12 mins</span></p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="w-full py-3 px-4 rounded-xl border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all active:scale-95 flex items-center justify-center gap-2">
+                        View Details
+                    </button>
+<button class="w-full py-3 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2">
+                        Track Order
+                    </button>
+</div>
+</div>
+<!-- Completed Order Card -->
+<div class="bg-surface-container-lowest p-stack-md rounded-[24px] order-card-shadow border border-transparent">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Oct 20, 2023 • #DC-7741</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-[16px]">check_circle</span>
+<span class="font-label-md text-label-md text-secondary font-bold">Delivered</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-sm text-headline-sm text-primary">$89.20</p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="flex -space-x-3 overflow-hidden">
+<img class="inline-block h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest object-cover" data-alt="A professional flat-lay photograph of a high-end grocery delivery box filled with fresh fruit and pantry staples. The lighting is crisp and clear, creating a sense of cleanliness and modern service. The color palette is neutral with vibrant natural food colors, reflecting a trustworthy logistics brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1TVXDe-H2uR4KpcQoIyCRiLraXZYpfPiQKDoFlSwIDEB5CcVfZDblRUhuSB7X8k_Jxg_8h4WCSPXR234BuVJ-bf2C0sXuXTLMwAMH0yArq9x2vU2Ccq1Mn4taKEPmk7gIzwOkXpiItEYR5higcWeEfO6AjgIyOAN2fU3bR39BRyPvgwhbcE69k2yGi-JBN7NPoUqtoIR0MFCXG9SBltvc3zragixO3uYggFkvov1Ya5hpt0MHNdwrlz0j8ehYb4CxJbfhyDTGc2Y"/>
+<div class="flex items-center justify-center h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">1</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">Great experience!</p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="w-full py-3 px-4 rounded-xl border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all active:scale-95 flex items-center justify-center gap-2">
+                        View Details
+                    </button>
+<button class="w-full py-3 px-4 rounded-xl bg-primary-container text-on-primary-container font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">replay</span> Reorder
+                    </button>
+</div>
+</div>
+<!-- Completed Order Card 2 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-[24px] order-card-shadow border border-transparent">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Oct 15, 2023 • #DC-6522</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-[16px]">check_circle</span>
+<span class="font-label-md text-label-md text-secondary font-bold">Delivered</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-sm text-headline-sm text-primary">$215.10</p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="flex -space-x-3 overflow-hidden">
+<img class="inline-block h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest object-cover" data-alt="A high-quality lifestyle photograph of various household essentials and cleaning products arranged in a clean, organized manner. The scene is lit with bright, natural sunlight, evoking a feeling of a well-maintained home. The aesthetic is professional and efficient, aligned with a modern delivery service brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWSI8vaRpQlhbmBp3cWBhm58sJYBCDz1TeMbWyhtc7ykQFlgh5bMR8itnoyx3J3wOqEbFbUrvMZn6Hl0iyz5F3dsyUuNCNnaj44d20HZJICdI7qbwO9cXwLK25jurx5sMq5SHXz2B6NBSIUe4Fl_daBeLV3KbtQTwHTPL-6Py7V92qsaNY-oW6aLnFI7xm1HFkVaqqg0TxbkO1N_Lfr5-SIp9Pu9Ier6bSQH2e8ga3VyjB2JFhH6HnwVV7emfNZAcsmh-m4KNSc2Y"/>
+<img class="inline-block h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest object-cover" data-alt="A sharp, detailed photograph of several high-quality artisanal bread loaves on a wooden surface in a bright, modern bakery setting. The lighting is warm and inviting, highlighting the textures of the food. The overall style is clean, corporate, and emphasizes premium quality products for a reliable service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCURkhatGhA8HKH0XeDFqiE9AuCLDSgFbE8rw-tYOfiV9iOtpUEQ-QoYW_ug-Qkk8ywGhjySYsnnZMvAtGsS_94Gcq4YrFOqSGfznPK38_iQmONA_bvHqjEQ76fPk4tb0j6cu-o2gpKDgrSKpzUVRfgVsHd6IyDYutVowBzgKMxsSfy9N-i12OILwjYUAHktdag56wUHJeYD8KGVuA5wkrqaFadcp7Q9n_w_tKpvS-fRixV1n2WYfApJAje8FSRlxGHPApHbTXI6_w"/>
+<div class="flex items-center justify-center h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">+5</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">7 items delivered</p>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="w-full py-3 px-4 rounded-xl border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all active:scale-95 flex items-center justify-center gap-2">
+                        View Details
+                    </button>
+<button class="w-full py-3 px-4 rounded-xl bg-primary-container text-on-primary-container font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">replay</span> Reorder
+                    </button>
+</div>
+</div>
+<!-- Cancelled Order Card -->
+<div class="bg-surface-container-lowest p-stack-md rounded-[24px] order-card-shadow border border-transparent opacity-80">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Oct 02, 2023 • #DC-5411</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[16px]">cancel</span>
+<span class="font-label-md text-label-md text-error font-bold">Cancelled</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">$42.00</p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="flex -space-x-3 overflow-hidden">
+<img class="inline-block h-12 w-12 rounded-xl ring-4 ring-surface-container-lowest object-cover grayscale" data-alt="A clean, professional photograph of diverse fresh produce including leafy greens and berries, presented in a minimalist, light-filled environment. The composition is artistic yet commercial, emphasizing the quality of items handled by a professional logistics firm. Bright, high-key lighting creates a modern light-mode feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYxerAESmBANXhm6ethPDFakQO6T03uy6twcRSC9QgEThrmqoBsp1M4qjg_3qcE3qBgzFl_1iNZB512AhwXQEfu-9llWVz8xXwAdwhARiLgYmo9sEc0KEgogblHT8LNVB4Tn_t5IdDyi4U1aRpofybcuBGE82FdNVh3GmIN-AMhAtT7prfM7HlP1f_ZmSWUvCNEM1h7hIkWx-W3S-YJB7fvySMEixuf7Rk-36y2_vqVab9x92ZlNoDkEBhBPgP4YHch4jeYRbFmt8"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">Refund processed</p>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<button class="w-full py-3 px-4 rounded-xl border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all active:scale-95 flex items-center justify-center gap-2">
+                        View Cancellation Details
+                    </button>
+</div>
+</div>
+</div>
+<!-- Help Section (Bottom of list) -->
+<div class="bg-primary-fixed p-6 rounded-[24px] flex items-center gap-4">
+<div class="bg-primary p-3 rounded-2xl">
+<span class="material-symbols-outlined text-on-primary">contact_support</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-primary-fixed mb-0.5">Need help?</p>
+<p class="font-body-sm text-body-sm text-on-primary-fixed-variant">Our support team is available 24/7</p>
+</div>
+<button class="ml-auto material-symbols-outlined text-on-primary-fixed">chevron_right</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-container-highest border-t border-outline-variant dark:border-outline shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] flex justify-around items-center h-20 px-2 pb-safe">
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-tertiary-container px-4 py-1.5 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1">construction</span>
+<span class="font-label-md text-label-md">Services</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl px-4 py-1.5 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-tertiary-container px-4 py-1.5 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-tertiary-container px-4 py-1.5 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for reorder buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if(this.innerText.includes('Reorder')) {
+                    const originalContent = this.innerHTML;
+                    this.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Adding...';
+                    this.classList.add('opacity-80');
+                    setTimeout(() => {
+                        this.innerHTML = '<span class="material-symbols-outlined">done</span> Added!';
+                        this.classList.remove('bg-primary-container');
+                        this.classList.add('bg-green-600', 'text-white');
+                        setTimeout(() => {
+                            this.innerHTML = originalContent;
+                            this.classList.remove('bg-green-600', 'text-white', 'opacity-80');
+                            this.classList.add('bg-primary-container');
+                        }, 2000);
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body></html>

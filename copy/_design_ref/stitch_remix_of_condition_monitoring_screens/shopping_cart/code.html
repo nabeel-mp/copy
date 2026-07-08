@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Your Cart - Doorcarts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Inter:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eeeef0",
+                    "on-primary-container": "#a9c1ff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1a1c1e",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "surface-container-highest": "#e2e2e5",
+                    "surface-container-low": "#f3f3f6",
+                    "outline-variant": "#c3c6d5",
+                    "primary-container": "#004aad",
+                    "on-tertiary-fixed": "#181c1e",
+                    "on-primary-fixed": "#001945",
+                    "surface-container-high": "#e8e8ea",
+                    "surface-dim": "#dadadc",
+                    "surface-tint": "#215abd",
+                    "primary": "#00357f",
+                    "error": "#ba1a1a",
+                    "secondary": "#5d5f5f",
+                    "secondary-container": "#dfe0e0",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0c6ff",
+                    "on-tertiary-fixed-variant": "#43474a",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f9f9fc",
+                    "on-primary-fixed-variant": "#00429b",
+                    "secondary-fixed": "#e2e2e2",
+                    "primary-fixed": "#d9e2ff",
+                    "on-tertiary-container": "#bfc2c5",
+                    "on-secondary-fixed-variant": "#454747",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "surface": "#f9f9fc",
+                    "surface-variant": "#e2e2e5",
+                    "tertiary-container": "#4c5053",
+                    "tertiary-fixed": "#e0e3e6",
+                    "on-surface-variant": "#434653",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "outline": "#737784",
+                    "tertiary": "#35393c",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f3133",
+                    "background": "#f9f9fc",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1a1c1e",
+                    "on-secondary-container": "#616363"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "stack-sm": "12px",
+                    "stack-md": "20px",
+                    "gutter": "16px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #c3c6d5;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col pb-40">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container shadow-md flex justify-between items-center px-container-padding h-16">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined transition-colors duration-200 hover:bg-primary-container/20 p-2 rounded-full" data-icon="menu">menu</button>
+<h1 class="font-display-lg text-display-lg font-extrabold text-on-primary dark:text-on-primary-container">Doorcarts</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined transition-colors duration-200 hover:bg-primary-container/20 p-2 rounded-full" data-icon="search">search</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-gutter py-6 space-y-6">
+<!-- Cart Items Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-sm text-headline-sm">Shopping Cart (2 Items)</h2>
+</div>
+<!-- Item 1: TMT Steel Rebars -->
+<div class="bg-surface-container-low rounded-xl p-4 flex gap-4 transition-transform duration-300">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="TMT Steel Rebars" class="w-full h-full object-cover" data-alt="A stack of industrial high-strength TMT steel rebars for building construction, shot in a professional warehouse setting. The lighting is clean and bright, emphasizing the metallic texture and ridges of the steel. The color palette is dominated by cool industrial greys and professional blues, reflecting a modern corporate logistics brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVOVCINqhzyn3iusR5K5wlPk_zpwYUBU4mb5H1tK6YzpRANNFUMgJ7khRL32V9t-F8vBUtARSj2ICjYjfH5mgbay445ut9YKen0r_9jDYDzrEo3OE67XhZiixdnR1dPSXPbzzSgzqxwsiHyw_B2igZ6Da1n6V9Pf_hhBl5C-7HY4gEWzD3BhlDF4tdQacYd44A2JnJ_TN1uk2PXLa8VtHJyMtZQb0zYsgUo38wu93SHHPCB71qATu2WvjIpbu2IB5sk7jvWoIdAxw"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary leading-tight">TMT Steel Rebars (12mm)</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Grade: Fe 500D</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹58,400 <span class="font-label-md text-label-md text-on-surface-variant">/ ton</span></span>
+<div class="flex items-center bg-surface-container-highest rounded-full px-2 py-1 gap-3">
+<button class="material-symbols-outlined text-primary hover:opacity-70" onclick="updateQty(this, -1)">remove_circle</button>
+<span class="font-headline-sm text-headline-sm min-w-[20px] text-center">2</span>
+<button class="material-symbols-outlined text-primary hover:opacity-70" onclick="updateQty(this, 1)">add_circle</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2: Premium OPC Cement -->
+<div class="bg-surface-container-low rounded-xl p-4 flex gap-4">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="OPC Cement Bags" class="w-full h-full object-cover" data-alt="A row of neatly stacked professional cement bags branded with minimalist blue graphics. The scene is set in a high-tech storage facility with soft ambient lighting and clean architectural lines. The image aesthetic is premium and professional, utilizing the brand's primary blue and neutral grey tones to convey reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm0wvJN0MH3pNzOkIfv3KPhzOqgKdYQLBBfTKO6m7khG6lgdCbVB7hZ4bw2aA9i3WoZLkq8lVWXEmMXUr6auy66LKy64JfEsTSDX5as3NWi0AjElIpJ-thrPOsIRENAd3WCHKYMGmuTzZ0dTS_VKgVPjhnaLMG-sevBceorrYsjuMedjwNwMvJylwrcC8OmKB8oe9st8uCWQsIKS47qqbZfODpc4za9a-UegmdUc4byMvfUuh40Xk8gCJ1wjkqlk51f8_eLlSPv6w"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary leading-tight">Premium OPC Cement</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Grade 53 | 50kg Bags</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-headline-sm text-headline-sm text-on-surface">₹450 <span class="font-label-md text-label-md text-on-surface-variant">/ bag</span></span>
+<div class="flex items-center bg-surface-container-highest rounded-full px-2 py-1 gap-3">
+<button class="material-symbols-outlined text-primary hover:opacity-70" onclick="updateQty(this, -1)">remove_circle</button>
+<span class="font-headline-sm text-headline-sm min-w-[20px] text-center">50</span>
+<button class="material-symbols-outlined text-primary hover:opacity-70" onclick="updateQty(this, 1)">add_circle</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Delivery Details Section -->
+<section class="bg-surface-container-low rounded-2xl p-6 space-y-4 shadow-sm border border-outline-variant">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<h3 class="font-headline-sm text-headline-sm">Delivery Details</h3>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Estimated Delivery</p>
+<p class="font-body-lg text-body-lg font-bold">Tomorrow, Oct 24th (09:00 AM - 05:00 PM)</p>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Delivery Location</p>
+<p class="font-body-lg text-body-lg font-bold">Site A: Sector 62, Noida, UP</p>
+</div>
+</div>
+<button class="w-full py-3 border border-primary text-primary rounded-xl font-bold hover:bg-primary/5 transition-colors">
+                Change Address
+            </button>
+</section>
+<!-- Order Summary Section -->
+<section class="bg-surface-container-lowest rounded-2xl p-6 space-y-4 shadow-md">
+<h3 class="font-headline-sm text-headline-sm border-b border-outline-variant pb-2">Price Details</h3>
+<div class="space-y-2">
+<div class="flex justify-between font-body-lg text-body-lg">
+<span class="text-on-surface-variant">Subtotal (2 items)</span>
+<span class="font-bold">₹1,39,300</span>
+</div>
+<div class="flex justify-between font-body-lg text-body-lg">
+<span class="text-on-surface-variant">GST (18%)</span>
+<span class="font-bold text-on-surface">₹25,074</span>
+</div>
+<div class="flex justify-between font-body-lg text-body-lg">
+<span class="text-on-surface-variant">Delivery Charges</span>
+<span class="text-on-primary-fixed-variant font-bold">FREE</span>
+</div>
+<div class="pt-4 mt-2 border-t border-dashed border-outline flex justify-between items-center">
+<span class="font-headline-md text-headline-md">Total Amount</span>
+<span class="font-headline-md text-headline-md text-primary">₹1,64,374</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-20 w-full max-w-2xl left-1/2 -translate-x-1/2 p-4 bg-background/80 backdrop-blur-lg z-40">
+<button class="w-full bg-primary text-on-primary py-5 rounded-2xl font-display-lg text-headline-md flex items-center justify-center gap-4 active:scale-95 transition-transform shadow-xl">
+            Place Order
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-dim flex justify-around items-center h-20 px-4 pb-safe shadow-lg border-t border-outline-variant dark:border-outline">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-label-md text-label-md">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="font-label-md text-label-md">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</nav>
+<script>
+        function updateQty(btn, delta) {
+            const container = btn.parentElement;
+            const span = container.querySelector('span');
+            let current = parseInt(span.innerText);
+            let next = Math.max(1, current + delta);
+            span.innerText = next;
+            
+            // Basic animation feedback
+            span.style.transform = 'scale(1.2)';
+            setTimeout(() => span.style.transform = 'scale(1)', 100);
+        }
+
+        // Handle active state from URL or intent
+        // In this case, "Cart" is the active tab based on page context
+    </script>
+</body></html>

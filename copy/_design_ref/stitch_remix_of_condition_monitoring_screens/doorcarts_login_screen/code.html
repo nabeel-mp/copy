@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Doorcarts Mobile Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-styles">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      /* Typical mobile device dimensions for preview */
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    
+    .brand-bg {
+      background-color: #0047AB; /* Deep blue from image */
+    }
+    
+    .text-brand-blue {
+      color: #0047AB;
+    }
+
+    .border-brand-blue {
+      border-color: #0047AB;
+    }
+
+    .bg-brand-blue {
+      background-color: #0047AB;
+    }
+
+    .card-top-rounded {
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+
+    /* Input styling to match floating label look */
+    .mobile-input-container {
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    .mobile-input-label {
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      background-color: white;
+      padding: 0 0.25rem;
+      font-size: 0.75rem;
+      color: #0047AB;
+      font-weight: 600;
+    }
+
+    .custom-checkbox {
+      accent-color: #0047AB;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+<!-- Mobile Device Container for Preview -->
+<div class="relative w-[375px] h-[812px] bg-white shadow-2xl rounded-[3rem] overflow-hidden flex flex-col">
+<!-- BEGIN: Top Branding Section -->
+<header class="brand-bg flex-1 flex flex-col items-center justify-center pt-10 pb-8 z-0 relative">
+<!-- Logo Container -->
+<div class="mb-4">
+<!-- Recreating the logo using SVG for crispness, approximating the shape -->
+<svg fill="none" height="150" viewbox="0 0 120 150" width="120" xmlns="http://www.w3.org/2000/svg">
+<path d="M40 20 L80 20 C100 20 110 35 110 55 L110 95 C110 115 100 130 80 130 L40 140 Z" fill="white"></path>
+<path d="M40 30 L60 35 L60 120 L40 125 Z" fill="#0047AB"></path>
+<!-- Door detail -->
+<path d="M60 40 L85 40 L85 115 L60 115 Z" fill="#0047AB"></path>
+<circle cx="70" cy="80" fill="white" r="4"></circle>
+</svg>
+</div>
+<!-- Brand Name -->
+<h1 class="text-white text-3xl font-bold tracking-wide">Doorcarts</h1>
+</header>
+<!-- END: Top Branding Section -->
+<!-- BEGIN: Login Card Section -->
+<main class="bg-white card-top-rounded w-full h-[45%] absolute bottom-0 z-10 flex flex-col px-6 py-8 shadow-[0_-10px_20px_rgba(0,0,0,0.1)]">
+<!-- Title -->
+<h2 class="text-brand-blue text-2xl font-semibold text-center mb-6">Login With Mobile</h2>
+<!-- Input Field -->
+<div class="mobile-input-container w-full mb-3">
+<label class="mobile-input-label">Mobile Number</label>
+<div class="flex items-center border-2 border-brand-blue rounded-xl px-4 py-3 bg-white">
+<span class="text-gray-600 font-medium text-lg mr-2">+91</span>
+<input class="flex-1 outline-none border-none p-0 text-gray-800 text-lg focus:ring-0 placeholder-gray-400 font-medium" placeholder="00000 00000" type="tel"/>
+</div>
+</div>
+<!-- Info Text -->
+<p class="text-center text-[10px] text-black font-semibold leading-tight mb-6 px-2">
+        This Login is verified Through Whatsapp, So Please Ensure<br/>You have Same Number Whatsapp On this Device.
+      </p>
+<!-- Terms Checkbox -->
+<div class="flex items-center justify-center mb-6">
+<input class="custom-checkbox w-4 h-4 border-brand-blue rounded-sm mr-2 cursor-pointer" id="privacy" type="checkbox"/>
+<label class="text-xs text-black font-semibold cursor-pointer" for="privacy">You accept our privacy and policies</label>
+</div>
+<!-- Verify Button -->
+<button class="w-full bg-brand-blue text-white rounded-2xl flex items-center p-1 shadow-md hover:bg-blue-800 transition-colors">
+<div class="bg-white rounded-xl py-3 px-4 flex items-center justify-center">
+<!-- Triple Arrow Icon -->
+<svg fill="none" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 12L10 6M4 12L10 18M4 12H12" stroke="#0047AB" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M10 12L16 6M10 12L16 18M10 12H18" stroke="#0047AB" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M16 12L22 6M16 12L22 18" stroke="#0047AB" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<span class="flex-1 text-center font-bold text-xl mr-12 tracking-wide">Verify</span>
+</button>
+</main>
+<!-- END: Login Card Section -->
+</div>
+</body></html>

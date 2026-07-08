@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Steel &amp; Rebars | Doorcarts</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#004aad",
+                    "on-secondary-fixed-variant": "#454747",
+                    "secondary-fixed": "#e2e2e2",
+                    "on-primary-fixed-variant": "#00429b",
+                    "surface-container-high": "#e8e8ea",
+                    "on-surface-variant": "#434653",
+                    "inverse-primary": "#b0c6ff",
+                    "secondary": "#5d5f5f",
+                    "surface-bright": "#f9f9fc",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#a9c1ff",
+                    "outline": "#737784",
+                    "on-background": "#1a1c1e",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-tertiary-fixed-variant": "#43474a",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#dfe0e0",
+                    "tertiary-container": "#4c5053",
+                    "tertiary-fixed-dim": "#c3c7ca",
+                    "primary": "#00357f",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9fc",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-surface": "#1a1c1e",
+                    "on-primary-fixed": "#001945",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeef0",
+                    "tertiary-fixed": "#e0e3e6",
+                    "on-tertiary-fixed": "#181c1e",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f3f3f6",
+                    "surface-dim": "#dadadc",
+                    "on-tertiary-container": "#bfc2c5",
+                    "inverse-surface": "#2f3133",
+                    "surface-variant": "#e2e2e5",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "background": "#f9f9fc",
+                    "surface-tint": "#215abd",
+                    "outline-variant": "#c3c6d5",
+                    "primary-fixed": "#d9e2ff",
+                    "tertiary": "#35393c",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#616363",
+                    "inverse-on-surface": "#f0f0f3",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "stack-md": "20px",
+                    "gutter": "16px",
+                    "stack-sm": "12px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "label-sm": ["Inter"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .product-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-sm px-4 flex flex-col pt-2 pb-3 gap-3">
+<div class="flex items-center justify-between h-12">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary flex-1 px-2">Steel &amp; Rebars</h1>
+<div class="flex gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[20px]">search</span>
+</div>
+<input class="w-full h-11 pl-10 pr-4 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent font-body-sm text-body-sm outline-none transition-all" placeholder="Search brands, grades or sizes..." type="text"/>
+</div>
+</header>
+<main class="pt-36 px-gutter">
+<!-- Horizontal Filters -->
+<section class="mb-stack-md -mx-gutter px-gutter overflow-x-auto hide-scrollbar flex gap-2 items-center">
+<button class="flex items-center gap-1.5 px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 duration-150">
+                All
+            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-secondary-container active:scale-95 duration-150">
+                TMT Bars
+            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-secondary-container active:scale-95 duration-150">
+                Binding Wire
+            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-secondary-container active:scale-95 duration-150">
+                Stirrups
+            </button>
+<div class="h-6 w-[1px] bg-outline-variant shrink-0 mx-1"></div>
+<button class="flex items-center gap-1 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap hover:bg-secondary-container active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                Filter
+            </button>
+</section>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 gap-4 pb-8">
+<!-- Card 1 -->
+<div class="product-card bg-surface-container-lowest rounded-[24px] overflow-hidden flex flex-col shadow-sm border border-surface-container">
+<div class="relative h-48 w-full bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A professional close-up photograph of high-quality JSW Neosteel TMT reinforcement bars stacked neatly. The steel rods have a distinctive ribbed texture and a clean metallic grey finish. The lighting is bright and industrial, emphasizing the strength and quality of the construction materials. The background is a clean, organized warehouse setting in a modern corporate light-mode style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX9HwzpxEq3lKLPtO9e2htyoJ_fcatSO2rqW0IGfKOxv0ETZSK7V-IOil-wYy4XXR9QwPk9Yl6S1JXFIKztI4cpj-ArxT3xyUR3PcDKwTPpKeVk9Til-aZpwFGsXHi7hOlHycCivGqVHLRg0nS3Dfm1CarJp3_aGBMq4IPFDwmlTOrrf7Y-N6JTgx22o9fK3GTtbHdvWYcRXhp1TDZLrXIQtn6ak1xLSsmEv8sX7YY-ZwdEsd2zWF93UlA2fv1MleLvZ7kaXoHxid4"/>
+<div class="absolute top-3 left-3 bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-md text-label-md shadow-sm">
+                        Bulk Savings
+                    </div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">JSW Neosteel TMT Bar</h3>
+<span class="material-symbols-outlined text-outline">info</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Fe 500D | 12mm High Strength</p>
+<div class="mt-auto flex items-end justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-0.5">Price starting at</p>
+<p class="font-headline-md text-headline-md font-extrabold text-primary">₹54,200 <span class="text-body-sm font-normal text-on-surface-variant">/ ton</span></p>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-2xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="product-card bg-surface-container-lowest rounded-[24px] overflow-hidden flex flex-col shadow-sm border border-surface-container">
+<div class="relative h-48 w-full bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="High-resolution commercial photography of Tata Tiscon 550SD TMT steel rods arranged in a fan shape. The rods show clear grade markings and a robust ribbed pattern. The aesthetic is clean and professional, using a neutral color palette with soft studio lighting that creates subtle highlights on the steel surface. The overall mood is one of reliability and industrial excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb-5TF9xOHzYAk2q7567DNDR1Vox9aXGPRnzwQuB0sykPAQPCexo9BIOXcS15vIXTh_q6_ubCr-wpkQ-xszS2AEfAJMTDAghHogDC-Drk1XOqcAh0HmUNZdHeok3yi5z3NbXCYQoMJb1kqq7EZxkAPI6ufCmtfbMRRKFirKwGhBuvjv0AZ1G70pzljczuCvQjluwZ2bwOI9AhTjN6_dJawoxl_94-UzkuVkFVlBeGGHzlDBdjnkRyK6TFfb76dZ7SBNRVxu0AQhTOI"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Tata Tiscon 550SD</h3>
+<span class="material-symbols-outlined text-outline">info</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Super Ductile | 10mm Standard</p>
+<div class="mt-auto flex items-end justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-0.5">Price starting at</p>
+<p class="font-headline-md text-headline-md font-extrabold text-primary">₹56,800 <span class="text-body-sm font-normal text-on-surface-variant">/ ton</span></p>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-2xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 (Accessory/Binding Wire) -->
+<div class="product-card bg-surface-container-lowest rounded-[24px] overflow-hidden flex flex-col shadow-sm border border-surface-container">
+<div class="relative h-48 w-full bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A detailed shot of a coiled bundle of high-grade galvanized binding wire for construction. The wire has a bright metallic sheen and is perfectly coiled. The lighting is crisp and clear, highlighting the fine texture of the thin steel wire. The background is a soft-focus industrial setting, maintaining a premium and trustworthy brand feel for a logistics-focused mobile app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwqmGPEzdKrlu9kc9S8IDacyq8hD0U7QTZBIKt1JbfWw-mdEcZ_4d6eXGkQwtHy8y6qFKeYRr3QKe5opo_g9eoywQwNd6aetJMNOX7xe-F1orSLG5Uk3KV07pdlpWVgOUlFfxEgDfWGtN42C6Zr3NqLJ9VaYkFxWOrkk0Nq-MrE_D1kZEdogaYz6hDLbeDciuotR7yJ69kUfE4eBYqU_PoCqKxwde8NQ_kJwfjeq5zaFXllNv3pZMknk9U5bV3esiDRrQ0FOj9zpNu"/>
+<div class="absolute top-3 left-3 bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-md text-label-md shadow-sm">
+                        Best Seller
+                    </div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">GI Binding Wire</h3>
+<span class="material-symbols-outlined text-outline">info</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">18 Gauge | 25kg Bundle</p>
+<div class="mt-auto flex items-end justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-0.5">Price starting at</p>
+<p class="font-headline-md text-headline-md font-extrabold text-primary">₹2,450 <span class="text-body-sm font-normal text-on-surface-variant">/ bundle</span></p>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-2xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 (Stirrups) -->
+<div class="product-card bg-surface-container-lowest rounded-[24px] overflow-hidden flex flex-col shadow-sm border border-surface-container">
+<div class="relative h-48 w-full bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Professional studio shot of pre-fabricated steel stirrups (rings) for beam reinforcement, stacked symmetrically. Each stirrup is precisely bent and finished in high-strength steel. The image is clean, with bright studio lighting and a subtle blue-grey background tone that aligns with the professional-service design system. The composition is artistic yet highlights the functional utility of the construction material." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANa9c7rSAMSAVaXMQ0o2F9KPY6aEQPaQqP-N7j3PANBVI1ZPWY8Oc0ZxoqoWn6qaFkMD4j3ZkEVO59h6f6-v399yVaQ57QJuWRHYZmK04lImw8jrRRUwfo3fNFKCCXXKJbsfTTtzN0srCb0scAroYSjt1z1AMtkDLnCdtjnkAuEz-OJImoY1o0QDPljnfA2IcZ5FoEa-nxVeIobpLJVFYHqyWgASCfm5TDPl9nc2sFoA_jB8CIRgBgCLbwSmJq92oUtc1jXvA7IbF6"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Ready Stirrups (Rings)</h3>
+<span class="material-symbols-outlined text-outline">info</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">8mm | 7" x 9" Size | Pack of 50</p>
+<div class="mt-auto flex items-end justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-0.5">Price starting at</p>
+<p class="font-headline-md text-headline-md font-extrabold text-primary">₹1,850 <span class="text-body-sm font-normal text-on-surface-variant">/ pack</span></p>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-2xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface rounded-t-xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] border-t border-outline-variant flex justify-around items-center h-20 px-2 pb-safe">
+<!-- Services (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">construction</span>
+<span class="font-label-md text-label-md mt-1">Services</span>
+</a>
+<!-- Bookings -->
+<a class="flex flex-col items-center justify-center text-on-secondary-container px-4 py-1.5 hover:bg-secondary-container transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md mt-1">Bookings</span>
+</a>
+<!-- Support -->
+<a class="flex flex-col items-center justify-center text-on-secondary-container px-4 py-1.5 hover:bg-secondary-container transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md mt-1">Support</span>
+</a>
+<!-- Account -->
+<a class="flex flex-col items-center justify-center text-on-secondary-container px-4 py-1.5 hover:bg-secondary-container transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Account</span>
+</a>
+</nav>
+<!-- Simple Interactivity Script -->
+<script>
+        // Handle filter button toggle
+        const filterButtons = document.querySelectorAll('section button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+            });
+        });
+
+        // Add to cart interaction
+        const cartButtons = document.querySelectorAll('.product-card button');
+        cartButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const icon = btn.querySelector('.material-symbols-outlined');
+                icon.textContent = 'check';
+                btn.classList.replace('bg-primary', 'bg-on-primary-container');
+                setTimeout(() => {
+                    icon.textContent = 'add';
+                    btn.classList.replace('bg-on-primary-container', 'bg-primary');
+                }, 1500);
+            });
+        });
+    </script>
+</body></html>

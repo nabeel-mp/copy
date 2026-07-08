@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Doorcarts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Inter:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9fc",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#616363",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eeeef0",
+                    "on-tertiary-container": "#bfc2c5",
+                    "surface-dim": "#dadadc",
+                    "on-surface-variant": "#434653",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#e2e2e2",
+                    "on-surface": "#1a1c1e",
+                    "inverse-primary": "#b0c6ff",
+                    "tertiary-container": "#4c5053",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-primary-fixed-variant": "#00429b",
+                    "secondary": "#5d5f5f",
+                    "outline-variant": "#c3c6d5",
+                    "surface-variant": "#e2e2e5",
+                    "surface-bright": "#f9f9fc",
+                    "inverse-surface": "#2f3133",
+                    "primary": "#00357f",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#e0e3e6",
+                    "surface-container-low": "#f3f3f6",
+                    "on-tertiary-fixed-variant": "#43474a",
+                    "on-background": "#1a1c1e",
+                    "secondary-container": "#dfe0e0",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#a9c1ff",
+                    "on-primary-fixed": "#001945",
+                    "tertiary": "#35393c",
+                    "surface": "#f9f9fc",
+                    "inverse-on-surface": "#f0f0f3",
+                    "primary-fixed": "#d9e2ff",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "primary-container": "#004aad",
+                    "outline": "#737784",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "tertiary-fixed-dim": "#c3c7ca",
+                    "surface-tint": "#215abd",
+                    "on-secondary-fixed-variant": "#454747",
+                    "surface-container-high": "#e8e8ea",
+                    "on-tertiary-fixed": "#181c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "12px",
+                    "stack-md": "20px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { -webkit-tap-highlight-color: transparent; }
+        .toggle-dot { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        input:checked ~ .toggle-dot { transform: translateX(100%); background-color: white; }
+        input:checked ~ .toggle-bg { background-color: #004aad; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        .dark .glass-card { background: rgba(47, 49, 51, 0.8); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container shadow-md z-40 flex justify-between items-center px-container-padding h-16 transition-colors duration-200">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined hover:bg-primary-container/20 p-2 rounded-full transition-colors" data-icon="menu">menu</button>
+<h1 class="font-display-lg text-headline-sm font-extrabold tracking-tight">Doorcarts</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined hover:bg-primary-container/20 p-2 rounded-full transition-colors" data-icon="search">search</button>
+</div>
+</header>
+<main class="flex-grow pb-32">
+<!-- Brand Header Section -->
+<section class="bg-primary pt-8 pb-16 px-container-padding text-on-primary relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container opacity-20 rounded-full -mr-20 -mt-20"></div>
+<div class="relative z-10">
+<h2 class="font-display-lg text-display-lg mb-2">Settings</h2>
+<p class="font-body-lg opacity-80">Manage your preferences and security</p>
+</div>
+</section>
+<!-- Settings Container -->
+<div class="px-container-padding -mt-10 relative z-20">
+<div class="bg-surface-container-lowest rounded-[40px] shadow-xl overflow-hidden p-stack-md flex flex-col gap-gutter border border-outline-variant/30">
+<!-- Notifications Toggle -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:bg-surface-container-low transition-colors duration-200 group">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined block" data-icon="notifications">notifications</span>
+</div>
+<div>
+<p class="font-headline-sm text-body-lg text-on-surface">Notifications</p>
+<p class="font-body-sm text-on-surface-variant">Get real-time order updates</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="toggle-bg w-12 h-6 bg-outline-variant rounded-full peer"></div>
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full"></div>
+</label>
+</div>
+<!-- Language Selection -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:bg-surface-container-low transition-colors duration-200 group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined block" data-icon="language">language</span>
+</div>
+<div>
+<p class="font-headline-sm text-body-lg text-on-surface">App Language</p>
+<p class="font-body-sm text-on-surface-variant">English (US)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Security -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:bg-surface-container-low transition-colors duration-200 group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined block" data-icon="security">security</span>
+</div>
+<div>
+<p class="font-headline-sm text-body-lg text-on-surface">Security</p>
+<p class="font-body-sm text-on-surface-variant">Change PIN or Password</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Dark Mode Toggle -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:bg-surface-container-low transition-colors duration-200 group">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined block" data-icon="dark_mode">dark_mode</span>
+</div>
+<div>
+<p class="font-headline-sm text-body-lg text-on-surface">Dark Mode</p>
+<p class="font-body-sm text-on-surface-variant">Toggle visual theme</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="darkModeToggle" type="checkbox"/>
+<div class="toggle-bg w-12 h-6 bg-outline-variant rounded-full peer"></div>
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full"></div>
+</label>
+</div>
+<!-- Privacy Policy -->
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:bg-surface-container-low transition-colors duration-200 group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined block" data-icon="policy">policy</span>
+</div>
+<div>
+<p class="font-headline-sm text-body-lg text-on-surface">Privacy Policy</p>
+<p class="font-body-sm text-on-surface-variant">Data usage and legal terms</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="open_in_new">open_in_new</span>
+</div>
+<div class="mt-stack-md pt-gutter border-t border-outline-variant/30 text-center">
+<button class="px-8 py-3 bg-error/10 text-error font-headline-sm text-body-lg rounded-full active:scale-95 transition-transform">
+                        Log Out
+                    </button>
+<p class="mt-stack-md font-label-md text-on-surface-variant opacity-60">App Version 2.4.1</p>
+</div>
+</div>
+</div>
+<!-- Help Section (Contextual) -->
+<section class="mt-stack-md px-container-padding">
+<div class="relative rounded-3xl overflow-hidden h-40 flex items-center p-8 text-on-primary">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A sophisticated 3D abstract render of flowing blue and white architectural lines with soft cinematic lighting representing high-end logistical precision and corporate reliability. Modern, sleek, professional atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHjYitIeRJHtMwpv_k2PZa6cupBh_bDzdHvv1sTI1A_9wOTQL6ThSX7geTVLgsJcPxznMGLmLu7HUlENB5A4iANS5pRa1Ogbvv6FZ6ublxPh9gInlY85yBs-SLdW32auciIXx5qkufvEcZ3ylLga4aBJmVz075HAokDZiHxXehqxRbPn9k0ZIQgz9jRi-tmSVLn63xHMalDX7Yoy0zl8XNYU-VJFiXb-_766tEhRazhKdiWkXdsPF564TxPTDFJTO_zaZRtjeJSeeu')"></div>
+<div class="absolute inset-0 bg-primary/60 backdrop-blur-sm"></div>
+<div class="relative z-10 flex flex-col items-start">
+<h3 class="font-headline-md text-headline-sm mb-1">Need help?</h3>
+<p class="font-body-sm mb-3">Our masters are ready to assist you.</p>
+<button class="bg-on-primary text-primary px-4 py-1.5 rounded-full font-label-md text-label-md uppercase tracking-wider shadow-md">Contact Support</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-dim shadow-lg border-t border-outline-variant dark:border-outline flex justify-around items-center h-20 px-4 pb-safe transition-colors duration-200">
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform group">
+<span class="material-symbols-outlined group-hover:scale-110" data-icon="construction">construction</span>
+<span class="font-label-md text-label-md mt-1">Services</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform group">
+<span class="material-symbols-outlined group-hover:scale-110" data-icon="event_note">event_note</span>
+<span class="font-label-md text-label-md mt-1">Bookings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform group">
+<span class="material-symbols-outlined group-hover:scale-110" data-icon="support_agent">support_agent</span>
+<span class="font-label-md text-label-md mt-1">Support</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-95 transition-transform group">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md mt-1">Account</span>
+</button>
+</nav>
+<script>
+        const darkToggle = document.getElementById('darkModeToggle');
+        darkToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Haptic feedback simulation
+        const buttons = document.querySelectorAll('button, label');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+    </script>
+</body></html>
