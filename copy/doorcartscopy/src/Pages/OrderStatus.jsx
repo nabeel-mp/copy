@@ -82,17 +82,13 @@ export default function OrderStatus() {
         let targetOrder = null;
 
         if (orderId) {
-          // Fetch specific order
-          const res = await orderService.getOrderById(orderId);
-          targetOrder = res.data?.order || res.data || res;
-        } else {
-          // Fallback: Fetch user's latest order if no ID was provided
-          const res = await orderService.getMyOrders();
-          const orders = res.data?.orders || res.data || res;
-          if (orders && orders.length > 0) {
-            targetOrder = orders[0]; // Assume the first is the most recent
-          }
-        }
+  targetOrder = await orderService.getOrderById(orderId);
+} else {
+  const orders = await orderService.getMyOrders();
+  if (orders && orders.length > 0) {
+    targetOrder = orders[0];
+  }
+}
 
         if (targetOrder) {
           setOrder(targetOrder);
@@ -133,7 +129,7 @@ export default function OrderStatus() {
   }
 
   // Generate dynamic data mapping based on backend order object
-  const steps = generateSteps(order.status, order.createdAt);
+const steps = generateSteps(order.orderStatus, order.createdAt);
   const displayId = order._id ? `#DC-${order._id.substring(order._id.length - 6).toUpperCase()}` : '#DC-UNKNOWN';
 
   return (
@@ -158,7 +154,7 @@ export default function OrderStatus() {
           <div className="relative z-10">
             <div className="flex justify-between items-center mb-1">
                <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">Order Status</p>
-               {order.status === 'Delivered' && (
+               {order.orderStatus === 'Delivered' && (
                  <span className="bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Delivered</span>
                )}
             </div>
@@ -199,7 +195,7 @@ export default function OrderStatus() {
         </section>
 
         {/* Map Snippet (Only show if not delivered yet) */}
-        {order.status !== 'Delivered' && (
+        {order.orderStatus !== 'Delivered' && (
           <section className="h-48 w-full rounded-[24px] overflow-hidden relative shadow-md bg-gradient-to-br from-gray-200 to-gray-300">
             {/* Visual map placeholder */}
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#004aad 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
@@ -223,7 +219,8 @@ export default function OrderStatus() {
         <section className="space-y-3">
           <div className="flex justify-between items-end px-1">
              <h3 className="text-lg font-bold text-gray-800">Order Summary</h3>
-             <span className="font-extrabold text-[#004aad]">{formatINR(order.totalAmount || 0)}</span>
+             <span className="font-extrabold text-[#004aad]">{formatINR(order.totalPrice || 0)}
+</span>
           </div>
           <div className="space-y-3">
             {(order.items || []).map((item, index) => {

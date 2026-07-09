@@ -14,16 +14,11 @@ export default function OrderHistory() {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      setIsLoading(true);
-      setErrorMessage('');
-      try {
-        // FIX: Specifically call getMyOrders() so we hit /api/orders/my (Avoids the 403 Admin error)
-        const response = await orderService.getMyOrders();
-        
-        // Safely unwrap data depending on how Axios/Backend is structured
-        const data = response.data?.orders || response.data || response || [];
-        
-        setOrders(Array.isArray(data) ? data : []);
+  setIsLoading(true);
+  setErrorMessage('');
+  try {
+    const data = await orderService.getMyOrders();
+    setOrders(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Failed to fetch orders:', error);
         setErrorMessage(error.response?.data?.message || 'Could not load your orders.');
@@ -87,7 +82,7 @@ export default function OrderHistory() {
         ) : (
           <div className="space-y-4 pb-6">
             {orders.map((order) => {
-              const statusUI = getStatusUI(order.status);
+              const statusUI = getStatusUI(order.orderStatus);
               const StatusIcon = statusUI.icon;
               const date = new Date(order.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
               const displayId = order._id ? order._id.substring(order._id.length - 6).toUpperCase() : 'UNKNOWN';
@@ -107,7 +102,7 @@ export default function OrderHistory() {
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{date}</p>
                     </div>
                     <div className="font-extrabold text-[#004aad] text-lg">
-                      {formatINR(order.totalAmount || 0)}
+                      {formatINR(order.totalPrice || 0)}
                     </div>
                   </div>
 

@@ -27,9 +27,8 @@ export default function Home() {
     let cancelled = false;
     const fetchCategories = async () => {
       try {
-        const response = await categoryService.getCategories();
-        const categoryData = response.data?.data || response.data || response || [];
-        if (!cancelled) setCategories(categoryData);
+        const categoryData = await categoryService.getCategories();
+        if (!cancelled) setCategories(categoryData || []);
       } catch (err) {
         if (!cancelled) setCategoryError(err.response?.data?.message || 'Could not load categories.');
       } finally {
