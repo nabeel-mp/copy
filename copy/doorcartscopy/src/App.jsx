@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/authContext';
 
-// Import your components
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Home from './Pages/Home';
@@ -15,16 +14,27 @@ import Wallet from './Pages/Wallet';
 import Support from './Pages/Support';
 import Account from './Pages/Account';
 import OrderSuccess from './Pages/OrderSuccess';
+import Settings from './Pages/Settings'; // New Settings
+
+// Admin Imports
+import AdminDashboard from './Pages/Admin/AdminDashboard';
+import AdminProducts from './Pages/Admin/AdminProducts';
+import AdminOrders from './Pages/Admin/AdminOrders';
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return children;
+};
+
+// Admin Protection Wrapper
+const AdminRoute = ({ isAuthenticated, user, children }) => {
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (user?.role !== 'admin') return <Navigate to="/home" replace />;
   return children;
 };
 
 function AppRoutes() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   if (isLoading) {
     return (
@@ -37,9 +47,10 @@ function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />} />
+        <Route path="/login" element={isAuthenticated ? (user?.role === 'admin' ? <Navigate to="/admin/dashboard" replace /> : <Navigate to="/home" replace />) : <Login />} />
         <Route path="/register" element={isAuthenticated ? <Register /> : <Navigate to="/login" replace />} />
 
+        {/* User Routes */}
         <Route path="/home" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Home /></ProtectedRoute>} />
         <Route path="/category/:slug" element={<ProtectedRoute isAuthenticated={isAuthenticated}><CategoryProducts /></ProtectedRoute>} />
         <Route path="/product/:slug" element={<ProtectedRoute isAuthenticated={isAuthenticated}><ProductDetails /></ProtectedRoute>} />
@@ -52,6 +63,12 @@ function AppRoutes() {
         <Route path="/wallet" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Wallet /></ProtectedRoute>} />
         <Route path="/support" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Support /></ProtectedRoute>} />
         <Route path="/account" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Account /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Settings /></ProtectedRoute>} />
+
+        {/* Admin Routes */}
+        <Route path="/admin/dashboard" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminDashboard /></AdminRoute>} />
+        <Route path="/admin/products" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminProducts /></AdminRoute>} />
+        <Route path="/admin/orders" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminOrders /></AdminRoute>} />
 
         <Route path="*" element={<Navigate to={isAuthenticated ? '/home' : '/login'} replace />} />
       </Routes>

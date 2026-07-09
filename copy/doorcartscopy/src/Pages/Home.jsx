@@ -94,7 +94,7 @@ export default function Home() {
                 { label: 'My Account', icon: User, path: '/account' },
                 { label: 'Order History', icon: History, path: '/order-history' },
                 { label: 'Wallet & Commissions', icon: Wallet, path: '/wallet' },
-                { label: 'Settings', icon: Settings, path: '#' },
+                { label: 'Settings', icon: Settings, path: '/settings' },
               ].map(({ label, icon: Icon, path }) => (
                 <li key={label}>
                   <button

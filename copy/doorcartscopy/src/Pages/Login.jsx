@@ -112,7 +112,7 @@ export default function Login() {
   // Calls POST /api/auth/verify-otp. On success, the backend sets the
   // httpOnly auth cookie and returns { user, token }; authService stores the
   // token as a fallback and we push the user into AuthContext.
-  const handleVerifyOtp = async () => {
+ const handleVerifyOtp = async () => {
     const code = otp.join('');
     if (code.length !== otp.length) {
       setErrorMessage('Please enter the full code.');
@@ -123,8 +123,14 @@ export default function Login() {
     try {
       const { user } = await authService.verifyOtp(phoneNumber, code);
       login(user);
-      // Brand new users have no name yet - send them to complete their profile.
-      navigate(user?.name ? '/home' : '/register');
+      
+      // REDIRECT LOGIC UPDATE:
+      if (user?.role === 'admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate(user?.name ? '/home' : '/register');
+      }
+      
     } catch (err) {
       setErrorMessage(err.response?.data?.message || 'Incorrect OTP code.');
     } finally {
