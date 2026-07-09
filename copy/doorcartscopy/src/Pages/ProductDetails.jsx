@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  Menu, Search, ShieldCheck, Ruler, Layers, Minus, Plus, Truck,
+  Search, ShieldCheck, Ruler, Layers, Minus, Plus, Truck,
   ShoppingCart, Zap as Flash, Loader2, ArrowLeft
 } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
@@ -29,12 +29,9 @@ export default function ProductDetails() {
       setIsLoading(true);
       setErrorMessage('');
       try {
-        // Handle fetching by slug (or ID if your backend accepts it)
-        const response = await productService.getProductBySlug(slug);
-        
-        // Safely unwrap Axios response
-        const data = response.data?.product || response.data || response;
-        
+        // productService.getProductBySlug already returns the unwrapped
+        // product object (see api/productService.js).
+        const data = await productService.getProductBySlug(slug);
         if (!cancelled) setProduct(data);
       } catch (err) {
         if (!cancelled) {
@@ -53,23 +50,12 @@ export default function ProductDetails() {
     setActiveSlide(index);
   };
 
-  // Safe Cart Method (handles if you named it addToCart or addCartItem in your service)
-  const executeAddToCart = async (prodId, qty) => {
-    if (cartService.addCartItem) {
-      return await cartService.addCartItem(prodId, qty);
-    } else if (cartService.addToCart) {
-      return await cartService.addToCart(prodId, qty);
-    } else {
-      throw new Error("Cart service method not found");
-    }
-  };
-
   const handleAddToCart = async () => {
     if (!product) return;
     setIsSubmitting(true);
     setFeedback('');
     try {
-      await executeAddToCart(product._id, quantity);
+      await cartService.addCartItem(product._id, quantity);
       setFeedback('Added to cart!');
       setTimeout(() => navigate('/cart'), 600);
     } catch (err) {
@@ -84,7 +70,7 @@ export default function ProductDetails() {
     setIsSubmitting(true);
     setFeedback('');
     try {
-      await executeAddToCart(product._id, quantity);
+      await cartService.addCartItem(product._id, quantity);
       navigate('/cart');
     } catch (err) {
       setFeedback(err.response?.data?.message || 'Could not start checkout.');

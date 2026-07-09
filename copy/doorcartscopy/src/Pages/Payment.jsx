@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import {
   ArrowLeft, Lock, CreditCard, Wallet, QrCode,
   Landmark, ShieldAlert, Loader2, CheckCircle2,
 } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
+import { useAuth } from '../context/authContext';
+import * as paymentService from '../api/paymentService';
 
-// Load Razorpay Script
+// Load Razorpay Script (skips re-injecting the <script> tag if it's already
+// present - e.g. if the user backs out and retries payment without a full
+// page reload).
 const loadRazorpaySDK = () => {
   return new Promise((resolve) => {
+    if (window.Razorpay) return resolve(true);
+    const existing = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(true));
+      existing.addEventListener('error', () => resolve(false));
+      return;
+    }
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.onload = () => resolve(true);
@@ -32,88 +42,87 @@ const OTHER_METHODS = [
 export default function Payment() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
   const [selectedMethod, setSelectedMethod] = useState('Google Pay'); // Default selection
   const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Receive data from Cart page (Fallback values provided)
-  const { totalAmount = 164374, cartItems = [], deliveryAddress = 'Site A' } = location.state || {};
+  // Cart.jsx creates the internal Order first (POST /api/orders) and hands
+  // off its id + total here - Payment only ever pays for an order that
+  // already exists server-side, it never invents amounts client-side.
+  const { orderId, totalAmount = 0 } = location.state || {};
+
+  // No order to pay for - bounce back to the cart rather than rendering a
+  // payment screen for a nonexistent/₹0 order.
+  useEffect(() => {
+    if (!orderId) {
+      navigate('/cart', { replace: true });
+    }
+  }, [orderId, navigate]);
 
   const handlePayNow = async () => {
     setStatus('processing');
-    
-    // 1. Load Razorpay
-    const res = await loadRazorpaySDK();
-    if (!res) {
-      alert('Razorpay SDK failed to load. Are you online?');
+    setErrorMessage('');
+
+    const sdkReady = await loadRazorpaySDK();
+    if (!sdkReady) {
+      setErrorMessage('Razorpay SDK failed to load. Check your connection and try again.');
       setStatus('idle');
       return;
     }
 
     try {
-      // Grab token safely, adjust if you use context/cookies
-      const token = localStorage.getItem('token') || localStorage.getItem('authToken');
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      
-      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      // Step 1: ask the backend to open a Razorpay order against the
+      // internal Order that Cart.jsx already created (POST /api/orders).
+      // paymentService uses the shared axios instance (api/axiosConfig.js),
+      // so auth is handled the same way as every other request in the app.
+      const { razorpayOrderId, amount, currency, keyId } = await paymentService.createRazorpayOrder(orderId);
 
-      // 2. Create Order on Backend
-      const orderResponse = await axios.post(`${baseURL}/api/payments/create-order`, {
-        amount: totalAmount,
-        items: cartItems,
-        deliveryAddress
-      }, { headers });
-
-      // Safely unwrap response based on your API wrapper structure
-      const orderData = orderResponse.data?.data?.order || orderResponse.data?.order || orderResponse.data;
-      const { id: order_id, amount, currency } = orderData;
-
-      // 3. Open Razorpay Checkout
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_YOUR_KEY_HERE", 
+        key: keyId || import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: amount.toString(),
-        currency: currency || "INR",
-        name: "Doorcarts",
-        description: "Payment for Materials",
-        order_id: order_id,
-       handler: async function (response) {
+        currency: currency || 'INR',
+        name: 'Doorcarts',
+        description: 'Payment for Materials',
+        order_id: razorpayOrderId,
+        handler: async function (response) {
           try {
-            const verifyRes = await axios.post(`${baseURL}/api/payments/verify`, {
+            // Step 2: verify the payment signature server-side and mark
+            // the internal Order as paid.
+            const order = await paymentService.verifyPayment({
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
-              orderId: order_id
-            }, { headers });
-
-            if (verifyRes.data?.success || verifyRes.status === 200) {
-              setStatus('success');
-              const finalOrderId = verifyRes.data?.data?.order?._id || order_id;
-              // REPLACED navigation to target the new Success Page:
-              setTimeout(() => navigate(`/order-success`, { state: { orderId: finalOrderId } }), 1000);
-            }
+              orderId,
+            });
+            setStatus('success');
+            setTimeout(() => navigate('/order-success', { state: { orderId: order._id } }), 1000);
           } catch (err) {
-            console.error("Payment Verification Failed", err);
-            alert("Payment Verification Failed! If amount was deducted, it will be refunded.");
+            console.error('Payment verification failed', err);
+            setErrorMessage(
+              err.response?.data?.message ||
+                'Payment verification failed. If an amount was deducted, it will be refunded.'
+            );
             setStatus('idle');
           }
         },
         prefill: {
-          name: "Customer", // You could fetch this from AuthContext later
-          contact: "",
+          name: user?.name || '',
+          contact: user?.phone || '',
         },
-        theme: { color: "#004aad" },
+        theme: { color: '#004aad' },
       };
 
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
 
       paymentObject.on('payment.failed', function (response) {
-        alert("Payment Failed: " + response.error.description);
+        setErrorMessage(`Payment failed: ${response.error.description}`);
         setStatus('idle');
       });
-
     } catch (error) {
       console.error(error);
-      alert('Could not initiate payment. Try again.');
+      setErrorMessage(error.response?.data?.message || 'Could not initiate payment. Please try again.');
       setStatus('idle');
     }
   };
@@ -206,10 +215,16 @@ export default function Payment() {
         </section>
 
         {/* Security Alert Banner */}
-        <section className="bg-[#fffdf5] border border-[#ffecb3] p-5 rounded-[24px] flex items-start gap-4 text-sm text-[#856404] mb-8 shadow-sm">
+        <section className="bg-[#fffdf5] border border-[#ffecb3] p-5 rounded-[24px] flex items-start gap-4 text-sm text-[#856404] mb-4 shadow-sm">
           <ShieldAlert size={24} className="flex-shrink-0 mt-0.5 text-[#d39e00]" />
           <p className="leading-relaxed font-medium">For your security, Doorcarts will <span className="font-bold underline">never</span> call you asking for your OTP, UPI PIN, or bank details.</p>
         </section>
+
+        {errorMessage && (
+          <p role="alert" className="text-sm text-center text-red-600 font-bold p-3 bg-red-50 rounded-lg mb-4">
+            {errorMessage}
+          </p>
+        )}
 
       </main>
 

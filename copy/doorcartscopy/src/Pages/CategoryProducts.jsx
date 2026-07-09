@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
 import * as productService from '../api/productService';
@@ -14,42 +14,34 @@ export default function CategoryProducts() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
+
     const fetchCategoryAndProducts = async () => {
       try {
         setIsLoading(true);
 
-        // 1. Fetch Category Name for the Header
-        const catRes = await categoryService.getCategories();
-        const categories = catRes?.data?.data || catRes?.data || catRes || [];
-        const currentCat = categories.find(c => c._id === slug || c.slug === slug);
-        if (currentCat) {
-          setCategoryName(currentCat.name);
-        } else {
-          setCategoryName('Products');
-        }
+        // categoryService.getCategories() already returns the unwrapped
+        // array (see api/categoryService.js), no further unwrapping needed.
+        const categories = await categoryService.getCategories();
+        const currentCat = categories.find((c) => c._id === slug || c.slug === slug);
+        if (!cancelled) setCategoryName(currentCat ? currentCat.name : 'Products');
 
-        // 2. Fetch Products OPTIMIZED: Let the backend filter by category directly
-        // productService.getProducts() returns an object: { products: [...], total, page }
-        const prodRes = await productService.getProducts({ category: slug });
-        
-        // 3. Safely extract the products array from the response object
-        let fetchedProducts = [];
-        if (prodRes && Array.isArray(prodRes.products)) {
-          fetchedProducts = prodRes.products; // Standard response
-        } else if (Array.isArray(prodRes)) {
-          fetchedProducts = prodRes; // Fallback if API changes
-        }
-
-        setProducts(fetchedProducts);
+        // productService.getProducts now forwards `category` as a real
+        // query param and returns the unwrapped { products, total, page, pages }.
+        const { products: fetchedProducts } = await productService.getProducts({ category: slug });
+        if (!cancelled) setProducts(fetchedProducts || []);
       } catch (error) {
-        console.error("Error fetching category products:", error);
-        setCategoryName('Error loading category');
+        if (!cancelled) {
+          console.error("Error fetching category products:", error);
+          setCategoryName('Error loading category');
+        }
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
     };
 
     fetchCategoryAndProducts();
+    return () => { cancelled = true; };
   }, [slug]);
 
   return (
@@ -93,7 +85,7 @@ export default function CategoryProducts() {
             {products.map((product) => (
               <div 
                 key={product._id} 
-                onClick={() => navigate(`/product/${product._id}`)}
+                onClick={() => navigate(`/product/${product.slug}`)}
                 className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden active:scale-95 transition-transform cursor-pointer flex flex-col"
               >
                 {/* Product Image */}

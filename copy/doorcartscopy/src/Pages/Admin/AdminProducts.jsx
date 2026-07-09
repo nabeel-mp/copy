@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import AdminBottomNav from '../../components/AdminBottomNav';
 import * as productService from '../../api/productService';
@@ -8,7 +8,9 @@ export default function AdminProducts() {
   const [products, setProducts] = useState([]);
 
   const loadProducts = () => {
-    productService.getProducts().then(res => setProducts(res.data?.products || res.data)).catch(console.error);
+    // productService.getProducts() now returns the unwrapped
+    // { products, total, page, pages } object directly (see api/productService.js).
+    productService.getProducts().then((res) => setProducts(res.products || [])).catch(console.error);
   };
 
   useEffect(() => { loadProducts(); }, []);

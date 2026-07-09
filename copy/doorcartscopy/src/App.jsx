@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/authContext';
+import { useAuth } from './context/authContext';
 
 import Login from './Pages/Login';
 import Register from './Pages/Register';
@@ -76,10 +76,11 @@ function AppRoutes() {
   );
 }
 
+// AuthProvider is mounted once, in main.jsx (which wraps <App /> directly).
+// It used to also be wrapped here, which meant two independent providers -
+// two parallel `/auth/me` calls on every load, and this outer provider's
+// state was never actually used, since AppRoutes reads from the nearest
+// (main.jsx) provider via context.
 export default function App() {
-  return (
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
-  );
+  return <AppRoutes />;
 }
