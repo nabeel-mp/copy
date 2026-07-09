@@ -73,13 +73,17 @@ const verifyOtp = asyncHandler(async (req, res) => {
     throw new ApiError(400, 'Incorrect OTP code');
   }
 
+  // FIX: Use findOneAndUpdate with upsert:true to atomically find or create 
+  // the user. This completely eliminates 409 race conditions on the phone number.
+  let user = await User.findOneAndUpdate(
+    { phone },
+    { $setOnInsert: { name: name || '' } },
+    { new: true, upsert: true }
+  );
+
+  // FIX: Only mark the OTP as verified AFTER the user is successfully found/created
   otpDoc.verified = true;
   await otpDoc.save();
-
-  let user = await User.findOne({ phone });
-  if (!user) {
-    user = await User.create({ phone, name: name || '' });
-  }
 
   const token = sendTokenResponse(res, user._id);
 
