@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ShoppingCart, Star } from 'lucide-react';
+import { ArrowLeft, ShoppingCart } from 'lucide-react';
 import * as productService from '../api/productService';
 import * as categoryService from '../api/categoryService';
+import ProductCard from '../components/ProductCard';
+import ProductCardSkeleton from '../components/ProductCardSkeleton';
 
 export default function CategoryProducts() {
   // The 'slug' parameter holds the category._id
-  const { slug } = useParams(); 
+  const { slug } = useParams();
   const navigate = useNavigate();
-  
+
   const [products, setProducts] = useState([]);
   const [categoryName, setCategoryName] = useState('Loading...');
   const [isLoading, setIsLoading] = useState(true);
@@ -20,19 +22,15 @@ export default function CategoryProducts() {
       try {
         setIsLoading(true);
 
-        // categoryService.getCategories() already returns the unwrapped
-        // array (see api/categoryService.js), no further unwrapping needed.
         const categories = await categoryService.getCategories();
         const currentCat = categories.find((c) => c._id === slug || c.slug === slug);
         if (!cancelled) setCategoryName(currentCat ? currentCat.name : 'Products');
 
-        // productService.getProducts now forwards `category` as a real
-        // query param and returns the unwrapped { products, total, page, pages }.
         const { products: fetchedProducts } = await productService.getProducts({ category: slug });
         if (!cancelled) setProducts(fetchedProducts || []);
       } catch (error) {
         if (!cancelled) {
-          console.error("Error fetching category products:", error);
+          console.error('Error fetching category products:', error);
           setCategoryName('Error loading category');
         }
       } finally {
@@ -46,12 +44,13 @@ export default function CategoryProducts() {
 
   return (
     <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans">
-      
+
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#004aad] shadow-md flex items-center justify-between px-4 h-16">
         <div className="flex items-center gap-3">
-          <button 
-            onClick={() => navigate(-1)} 
+          <button
+            onClick={() => navigate(-1)}
+            aria-label="Go back"
             className="text-white p-2 rounded-full hover:bg-white/10 transition-colors"
           >
             <ArrowLeft size={20} />
@@ -60,8 +59,9 @@ export default function CategoryProducts() {
             {categoryName}
           </h1>
         </div>
-        <button 
-          onClick={() => navigate('/cart')} 
+        <button
+          onClick={() => navigate('/cart')}
+          aria-label="Go to cart"
           className="text-white p-2 rounded-full hover:bg-white/10 transition-colors relative"
         >
           <ShoppingCart size={22} />
@@ -71,8 +71,10 @@ export default function CategoryProducts() {
       {/* Main Content */}
       <main className="p-4 pb-20">
         {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#004aad]"></div>
+          <div className="grid grid-cols-2 gap-4" aria-busy="true" aria-label="Loading products">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
           </div>
         ) : products.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-64 text-gray-400">
@@ -83,50 +85,7 @@ export default function CategoryProducts() {
         ) : (
           <div className="grid grid-cols-2 gap-4">
             {products.map((product) => (
-              <div 
-                key={product._id} 
-                onClick={() => navigate(`/product/${product.slug}`)}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden active:scale-95 transition-transform cursor-pointer flex flex-col"
-              >
-                {/* Product Image */}
-                <div className="h-32 bg-gray-50 flex items-center justify-center p-2 relative">
-                  <img 
-                    src={product.images?.[0] || 'https://via.placeholder.com/150'} 
-                    alt={product.name}
-                    className="max-h-full max-w-full object-contain mix-blend-multiply"
-                  />
-                  {product.discountPrice && (
-                    <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md">
-                      SALE
-                    </span>
-                  )}
-                </div>
-                
-                {/* Product Details */}
-                <div className="p-3 flex flex-col flex-1">
-                  <h3 className="text-sm font-bold text-gray-800 line-clamp-2 leading-tight mb-1">
-                    {product.name}
-                  </h3>
-                  
-                  <div className="flex items-center gap-1 mb-2">
-                    <Star size={12} className="text-yellow-400 fill-yellow-400" />
-                    <span className="text-xs font-semibold text-gray-600">4.5</span>
-                  </div>
-
-                  <div className="mt-auto">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-base font-extrabold text-[#004aad]">
-                        ₹{product.discountPrice || product.price}
-                      </span>
-                      {product.discountPrice && (
-                        <span className="text-xs text-gray-400 line-through font-medium">
-                          ₹{product.price}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
         )}
