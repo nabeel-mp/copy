@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Search, ShieldCheck, Ruler, Layers, Minus, Plus, Truck,
-  ShoppingCart, Zap as Flash, Loader2, ArrowLeft
+  ShoppingCart, Zap as Flash, ArrowLeft
 } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
+import ProductDetailsSkeleton from '../components/ProductDetailsSkeleton';
 import * as productService from '../api/productService';
 import * as cartService from '../api/cartService';
 
@@ -22,15 +23,12 @@ export default function ProductDetails() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState('');
 
-  // GET /api/products/:slug (or ID fallback)
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
       setIsLoading(true);
       setErrorMessage('');
       try {
-        // productService.getProductBySlug already returns the unwrapped
-        // product object (see api/productService.js).
         const data = await productService.getProductBySlug(slug);
         if (!cancelled) setProduct(data);
       } catch (err) {
@@ -78,48 +76,60 @@ export default function ProductDetails() {
     }
   };
 
+  // Shared header used for loading, error, and loaded states so the page
+  // shell doesn't flash/rearrange once data arrives.
+  const header = (
+    <header className="w-full sticky top-0 z-50 bg-[#004aad] shadow-md flex justify-between items-center px-4 h-16">
+      <div className="flex items-center gap-3">
+        <button onClick={() => navigate(-1)} className="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
+          <ArrowLeft size={20} />
+        </button>
+        <h1 className="text-xl font-extrabold text-white">Doorcarts</h1>
+      </div>
+      <button className="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
+        <Search size={20} />
+      </button>
+    </header>
+  );
+
   if (isLoading) {
     return (
-      <div className="w-full max-w-md mx-auto min-h-[100dvh] flex items-center justify-center bg-[#f9f9fc]">
-        <Loader2 className="animate-spin text-[#004aad]" size={28} />
+      <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24">
+        {header}
+        <main className="w-full" aria-busy="true" aria-label="Loading product">
+          <ProductDetailsSkeleton />
+        </main>
+        <BottomNav active="services" />
       </div>
     );
   }
 
   if (errorMessage || !product) {
     return (
-      <div className="w-full max-w-md mx-auto min-h-[100dvh] flex flex-col items-center justify-center bg-[#f9f9fc] gap-4 px-6">
-        <p className="text-sm text-red-500 text-center">{errorMessage || 'Product not found.'}</p>
-        <button onClick={() => navigate('/')} className="text-[#004aad] font-bold text-sm">
-          Back to Home
-        </button>
+      <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24">
+        {header}
+        <div className="flex flex-col items-center justify-center gap-4 px-6 py-24">
+          <p className="text-sm text-red-500 text-center">{errorMessage || 'Product not found.'}</p>
+          <button onClick={() => navigate('/')} className="text-[#004aad] font-bold text-sm">
+            Back to Home
+          </button>
+        </div>
+        <BottomNav active="services" />
       </div>
     );
   }
 
   const price = product.discountPrice > 0 ? product.discountPrice : product.price;
-  
-  // Safely handle both product.images (array) and product.image (string) for legacy records
-  const images = product.images?.length 
-    ? product.images 
-    : product.image 
-      ? [product.image] 
+
+  const images = product.images?.length
+    ? product.images
+    : product.image
+      ? [product.image]
       : [null];
 
   return (
     <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-40">
-      {/* Top App Bar */}
-      <header className="w-full sticky top-0 z-50 bg-[#004aad] shadow-md flex justify-between items-center px-4 h-16">
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
-            <ArrowLeft size={20} />
-          </button>
-          <h1 className="text-xl font-extrabold text-white">Doorcarts</h1>
-        </div>
-        <button className="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
-          <Search size={20} />
-        </button>
-      </header>
+      {header}
 
       <main className="w-full">
         {/* Image Gallery */}
@@ -155,7 +165,6 @@ export default function ProductDetails() {
         {/* Product Info Canvas */}
         <div className="px-5 -mt-6 relative z-10">
           <div className="bg-white rounded-t-[32px] p-6 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] border-t border-gray-50">
-            {/* Title & Badge */}
             <div className="flex flex-col gap-2 mb-4">
               <div className="flex justify-between items-start gap-3">
                 <h2 className="text-xl font-bold text-gray-800 leading-tight">{product.name}</h2>
@@ -174,7 +183,6 @@ export default function ProductDetails() {
               {product.brand && <p className="text-sm text-gray-500 font-medium">by {product.brand}</p>}
             </div>
 
-            {/* Specs Grid */}
             <div className="grid grid-cols-3 gap-3 mb-8 mt-6">
               {[
                 { icon: ShieldCheck, label: 'Stock', value: product.stock > 0 ? `${product.stock} units` : 'Out of stock' },
@@ -191,7 +199,6 @@ export default function ProductDetails() {
               ))}
             </div>
 
-            {/* Quantity Selector */}
             <div className="space-y-5 mb-6">
               <div>
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-3">Select Quantity</label>
@@ -213,7 +220,6 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            {/* Delivery Estimator */}
             <div className="p-4 bg-[#f8fbff] border border-[#e5edfa] rounded-2xl mb-8 flex items-start gap-3">
               <Truck size={20} className="text-[#004aad] mt-0.5 flex-shrink-0" />
               <div>
@@ -223,7 +229,6 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            {/* Description */}
             <div className="mb-4">
               <h3 className="text-base font-bold text-gray-800 mb-3 border-b pb-2">Product Details</h3>
               <p className="text-sm text-gray-600 whitespace-pre-line leading-relaxed">
@@ -238,7 +243,6 @@ export default function ProductDetails() {
         </div>
       </main>
 
-      {/* Sticky Bottom Actions */}
       <div className="fixed bottom-[72px] left-0 w-full max-w-md mx-auto right-0 bg-white/95 backdrop-blur-md p-4 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.05)] z-40 border-t border-gray-100">
         <button
           onClick={handleAddToCart}

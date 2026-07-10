@@ -9,7 +9,11 @@ export default function Support() {
   return (
     <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24">
       <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 bg-[#004aad] shadow-md flex items-center gap-3 px-4 h-16">
-        <button onClick={() => navigate(-1)} className="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
+        <button
+          onClick={() => navigate(-1)}
+          aria-label="Go back"
+          className="text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+        >
           <ArrowLeft size={20} />
         </button>
         <h1 className="text-lg font-extrabold text-white">Help & Support</h1>
@@ -45,13 +49,14 @@ export default function Support() {
             </div>
           </a>
 
-          <div className="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+          {/* Not yet implemented - shown as disabled rather than a dead click target */}
+          <div className="flex items-center gap-4 p-4 opacity-60" aria-disabled="true">
             <div className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-orange-600">
               <MessageSquare size={24} />
             </div>
-            <div>
+            <div className="flex-1">
               <h3 className="font-bold text-gray-800">Live Chat</h3>
-              <p className="text-sm text-gray-500">Typical reply in 5 mins</p>
+              <p className="text-sm text-gray-500">Coming soon</p>
             </div>
           </div>
         </div>

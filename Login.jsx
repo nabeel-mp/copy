@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronsRight, MailCheck } from 'lucide-react';
-import { useAuth } from '../context/authContext';
-import * as authService from '../api/authService';
+import { useAuth } from './copy/doorcartscopy/src/context/authContext';
+import * as authService from './copy/doorcartscopy/src/api/authService';
 
 const RESEND_SECONDS = 30;
 

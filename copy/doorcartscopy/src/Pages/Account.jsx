@@ -19,12 +19,20 @@ export default function Account() {
     <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24">
       <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 bg-[#004aad] shadow-md flex items-center justify-between px-4 h-16">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
+          <button
+            onClick={() => navigate(-1)}
+            aria-label="Go back"
+            className="text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+          >
             <ArrowLeft size={20} />
           </button>
           <h1 className="text-lg font-extrabold text-white">My Account</h1>
         </div>
-        <button className="text-white p-2 rounded-full hover:bg-white/10 transition-colors" onClick={() => navigate('/register')}>
+        <button
+          onClick={() => navigate('/register')}
+          aria-label="Edit profile"
+          className="text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+        >
           <Edit3 size={20} />
         </button>
       </header>
@@ -42,7 +50,7 @@ export default function Account() {
         <section className="space-y-4">
           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider px-2">Personal Details</h3>
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            
+
             <div className="flex items-center gap-4 p-4 border-b border-gray-50">
               <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-[#004aad]">
                 <User size={20} />
@@ -91,7 +99,7 @@ export default function Account() {
         </section>
 
         <section className="pt-4">
-          <button 
+          <button
             onClick={handleLogout}
             className="w-full bg-red-50 text-red-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-red-100 transition-colors"
           >

@@ -22,6 +22,7 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [categoryError, setCategoryError] = useState('');
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -46,9 +47,14 @@ export default function Home() {
     navigate('/login');
   };
 
+  const handleSlideScroll = (e) => {
+    const index = Math.round(e.target.scrollLeft / (e.target.clientWidth * 0.85));
+    setActiveSlide(Math.min(index, SLIDES.length - 1));
+  };
+
   return (
     <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24 overflow-x-hidden">
-      
+
       {/* SAFE DRAWER RENDERING: 
         Hidden via CSS opacity/visibility instead of unmounting. 
         This prevents the "removeChild" crash caused by browser extensions.
@@ -82,7 +88,11 @@ export default function Home() {
                 <p className="text-sm text-gray-500">{user?.phone || 'Guest User'}</p>
               </div>
             </div>
-            <button onClick={() => setDrawerOpen(false)} className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
+            <button
+              onClick={() => setDrawerOpen(false)}
+              aria-label="Close menu"
+              className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+            >
               <X size={20} />
             </button>
           </div>
@@ -122,11 +132,18 @@ export default function Home() {
 
       <header className="bg-[#004aad] w-full sticky top-0 z-40 shadow-md">
         <div className="flex justify-between items-center px-6 h-16">
-          <button onClick={() => setDrawerOpen(true)} className="text-white p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors">
+          <button
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Open menu"
+            className="text-white p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors"
+          >
             <Menu size={24} />
           </button>
           <h1 className="text-2xl font-extrabold text-white tracking-wide">Doorcarts</h1>
-          <button className="text-white p-2 -mr-2 rounded-full hover:bg-white/10 transition-colors">
+          <button
+            aria-label="Search"
+            className="text-white p-2 -mr-2 rounded-full hover:bg-white/10 transition-colors"
+          >
             <Search size={24} />
           </button>
         </div>
@@ -134,14 +151,23 @@ export default function Home() {
 
       <main className="w-full flex flex-col gap-6 pt-6 pb-4">
         <section className="px-6">
+          <label htmlFor="home-search" className="sr-only">Search materials</label>
           <div className="relative shadow-sm group">
             <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#004aad] transition-colors" />
-            <input type="text" placeholder="Search materials..." className="block w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-xl text-gray-800 focus:ring-2 focus:ring-[#004aad]/20 focus:border-[#004aad] transition-all outline-none" />
+            <input
+              id="home-search"
+              type="text"
+              placeholder="Search materials..."
+              className="block w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-xl text-gray-800 focus:ring-2 focus:ring-[#004aad]/20 focus:border-[#004aad] transition-all outline-none"
+            />
           </div>
         </section>
 
         <section className="px-6 overflow-hidden">
-          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-1 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div
+            onScroll={handleSlideScroll}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-1 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {SLIDES.map((slide) => (
               <div key={slide.title} className="snap-center shrink-0 w-[85%] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className={`h-36 relative bg-gradient-to-br ${slide.gradient} p-5 flex flex-col justify-end`}>
@@ -153,12 +179,23 @@ export default function Home() {
               </div>
             ))}
           </div>
+          {SLIDES.length > 1 && (
+            <div className="flex justify-center gap-2 mt-3">
+              {SLIDES.map((slide, i) => (
+                <div
+                  key={slide.title}
+                  className={`h-1.5 rounded-full transition-all ${
+                    activeSlide === i ? 'w-5 bg-[#004aad]' : 'w-1.5 bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="px-6">
           <div className="flex justify-between items-end mb-4">
             <h2 className="text-lg font-bold text-gray-800">Categories</h2>
-            <button className="text-sm font-semibold text-[#004aad] hover:underline">See All</button>
           </div>
           
           {/* SAFE RENDERING: Grouped in a stable min-height div to stop React diffing issues */}

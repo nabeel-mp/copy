@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import {
-  ArrowLeft, ShoppingCart, CalendarClock, Check, Truck, Clock, User, Phone, LifeBuoy, Loader2
+  ArrowLeft, ShoppingCart, CalendarClock, Check, Truck, Clock, User, Phone, LifeBuoy
 } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
-import * as orderService from '../api/orderService'; // Adjust path if needed
+import OrderStatusSkeleton from '../components/OrderStatusSkeleton';
+import * as orderService from '../api/orderService';
 
 const formatINR = (n) => `₹${Number(n).toLocaleString('en-IN')}`;
 
-// Helper for dynamic steps based on backend status
 const generateSteps = (currentStatus, dateString) => {
-  const baseDate = dateString 
-    ? new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) 
+  const baseDate = dateString
+    ? new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     : 'Recently';
 
   const allSteps = [
@@ -21,7 +21,6 @@ const generateSteps = (currentStatus, dateString) => {
     { title: 'Out for Delivery', detail: 'Arriving soon', key: 'out_for_delivery' },
   ];
 
-  // Map typical backend statuses to an index
   const statusMap = {
     'pending': 0,
     'processing': 1,
@@ -33,7 +32,6 @@ const generateSteps = (currentStatus, dateString) => {
   const currentIdx = statusMap[(currentStatus || 'pending').toLowerCase()] || 0;
 
   return allSteps.map((step, i) => {
-    // If order is delivered, all are done. Otherwise, calculate relative to current step.
     if (currentStatus?.toLowerCase() === 'delivered' || i < currentIdx) return { ...step, state: 'done' };
     if (i === currentIdx) return { ...step, state: 'current' };
     return { ...step, state: 'pending' };
@@ -64,10 +62,9 @@ function StepDot({ state }) {
 
 export default function OrderStatus() {
   const navigate = useNavigate();
-  const { id } = useParams(); 
+  const { id } = useParams();
   const location = useLocation();
-  
-  // Try to get order ID from URL params, or from navigation state
+
   const orderId = id || location.state?.orderId;
 
   const [order, setOrder] = useState(null);
@@ -82,13 +79,13 @@ export default function OrderStatus() {
         let targetOrder = null;
 
         if (orderId) {
-  targetOrder = await orderService.getOrderById(orderId);
-} else {
-  const orders = await orderService.getMyOrders();
-  if (orders && orders.length > 0) {
-    targetOrder = orders[0];
-  }
-}
+          targetOrder = await orderService.getOrderById(orderId);
+        } else {
+          const orders = await orderService.getMyOrders();
+          if (orders && orders.length > 0) {
+            targetOrder = orders[0];
+          }
+        }
 
         if (targetOrder) {
           setOrder(targetOrder);
@@ -106,10 +103,29 @@ export default function OrderStatus() {
     fetchOrder();
   }, [orderId]);
 
+  // Shared header/nav shell so loading/error/loaded states don't jump.
+  const header = (
+    <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 bg-white shadow-sm flex justify-between items-center h-16 px-4">
+      <div className="flex items-center gap-3">
+        <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 transition-colors rounded-full active:scale-95">
+          <ArrowLeft size={20} className="text-[#004aad]" />
+        </button>
+        <h1 className="text-lg font-bold text-[#004aad]">Track Order</h1>
+      </div>
+      <button onClick={() => navigate('/cart')} className="p-2 hover:bg-gray-100 transition-colors rounded-full active:scale-95">
+        <ShoppingCart size={20} className="text-[#004aad]" />
+      </button>
+    </header>
+  );
+
   if (isLoading) {
     return (
-      <div className="w-full max-w-md mx-auto min-h-[100dvh] flex items-center justify-center bg-[#f9f9fc]">
-        <Loader2 className="animate-spin text-[#004aad]" size={32} />
+      <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24">
+        {header}
+        <div aria-busy="true" aria-label="Loading order tracking">
+          <OrderStatusSkeleton />
+        </div>
+        <BottomNav active="bookings" />
       </div>
     );
   }
@@ -128,27 +144,14 @@ export default function OrderStatus() {
     );
   }
 
-  // Generate dynamic data mapping based on backend order object
-const steps = generateSteps(order.orderStatus, order.createdAt);
+  const steps = generateSteps(order.orderStatus, order.createdAt);
   const displayId = order._id ? `#DC-${order._id.substring(order._id.length - 6).toUpperCase()}` : '#DC-UNKNOWN';
 
   return (
     <div className="relative w-full max-w-md mx-auto min-h-[100dvh] bg-[#f9f9fc] font-sans pb-24">
-      {/* Top App Bar */}
-      <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 bg-white shadow-sm flex justify-between items-center h-16 px-4">
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 transition-colors rounded-full active:scale-95">
-            <ArrowLeft size={20} className="text-[#004aad]" />
-          </button>
-          <h1 className="text-lg font-bold text-[#004aad]">Track Order</h1>
-        </div>
-        <button onClick={() => navigate('/cart')} className="p-2 hover:bg-gray-100 transition-colors rounded-full active:scale-95">
-          <ShoppingCart size={20} className="text-[#004aad]" />
-        </button>
-      </header>
+      {header}
 
       <main className="pt-20 px-4 space-y-5">
-        {/* Order Header Card */}
         <section className="bg-[#004aad] p-6 rounded-[28px] text-white shadow-lg overflow-hidden relative">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
           <div className="relative z-10">
@@ -169,7 +172,6 @@ const steps = generateSteps(order.orderStatus, order.createdAt);
           </div>
         </section>
 
-        {/* Progress Tracker */}
         <section className="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100">
           <h3 className="text-lg font-bold text-gray-800 mb-5">Delivery Progress</h3>
           <div className="space-y-7">
@@ -194,10 +196,8 @@ const steps = generateSteps(order.orderStatus, order.createdAt);
           </div>
         </section>
 
-        {/* Map Snippet (Only show if not delivered yet) */}
         {order.orderStatus !== 'Delivered' && (
           <section className="h-48 w-full rounded-[24px] overflow-hidden relative shadow-md bg-gradient-to-br from-gray-200 to-gray-300">
-            {/* Visual map placeholder */}
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#004aad 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-white/95 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-lg">
@@ -215,7 +215,6 @@ const steps = generateSteps(order.orderStatus, order.createdAt);
           </section>
         )}
 
-        {/* Item Summary */}
         <section className="space-y-3">
           <div className="flex justify-between items-end px-1">
              <h3 className="text-lg font-bold text-gray-800">Order Summary</h3>
@@ -226,8 +225,7 @@ const steps = generateSteps(order.orderStatus, order.createdAt);
             {(order.items || []).map((item, index) => {
               const product = item.product || {};
               const price = product.discountPrice > 0 ? product.discountPrice : product.price;
-              
-              // Fallback gradients
+
               const fallbackGradients = ['from-gray-400 to-gray-600', 'from-[#004aad] to-[#00296b]'];
               const gradient = fallbackGradients[index % fallbackGradients.length];
 
@@ -249,7 +247,6 @@ const steps = generateSteps(order.orderStatus, order.createdAt);
           </div>
         </section>
 
-        {/* Support Action */}
         <section className="pt-2 pb-6">
           <button className="w-full h-14 bg-white border-2 border-[#004aad] text-[#004aad] rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-[#004aad]/5 transition-colors active:scale-95">
             <LifeBuoy size={20} />

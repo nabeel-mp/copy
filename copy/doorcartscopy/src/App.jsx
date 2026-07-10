@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/authContext';
 
-import Login from './Pages/Login';
+import Login from '../../../Login';
 import Register from './Pages/Register';
 import Home from './Pages/Home';
 import CategoryProducts from './Pages/CategoryProducts';
@@ -20,6 +20,8 @@ import Settings from './Pages/Settings'; // New Settings
 import AdminDashboard from './Pages/Admin/AdminDashboard';
 import AdminProducts from './Pages/Admin/AdminProducts';
 import AdminOrders from './Pages/Admin/AdminOrders';
+import AdminProductForm from './Pages/Admin/AdminProductForm';
+
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
   if (!isAuthenticated) return <Navigate to="/login" replace />;
@@ -68,6 +70,8 @@ function AppRoutes() {
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/products" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminProducts /></AdminRoute>} />
+        <Route path="/admin/products/new" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminProductForm /></AdminRoute>} />
+        <Route path="/admin/products/:id/edit" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminProductForm /></AdminRoute>} />
         <Route path="/admin/orders" element={<AdminRoute isAuthenticated={isAuthenticated} user={user}><AdminOrders /></AdminRoute>} />
 
         <Route path="*" element={<Navigate to={isAuthenticated ? '/home' : '/login'} replace />} />

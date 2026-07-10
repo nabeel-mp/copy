@@ -29,4 +29,32 @@ const getDashboardStats = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { getDashboardStats };
+// @desc    Admin: list ALL products (including deactivated/isActive:false).
+//          The public GET /api/products always filters isActive:true, so
+//          admin needs its own view in order to find and reactivate
+//          soft-deleted products.
+// @route   GET /api/admin/products
+// @access  Private/Admin
+const getAllProducts = asyncHandler(async (req, res) => {
+  const { page = 1, limit = 50 } = req.query;
+  const pageNum = Number(page);
+  const limitNum = Number(limit);
+
+  const [products, total] = await Promise.all([
+    Product.find({})
+      .populate('category', 'name slug')
+      .sort({ createdAt: -1 })
+      .skip((pageNum - 1) * limitNum)
+      .limit(limitNum),
+    Product.countDocuments({})
+  ]);
+
+  return sendSuccess(res, 200, {
+    products,
+    total,
+    page: pageNum,
+    pages: Math.ceil(total / limitNum)
+  });
+});
+
+module.exports = { getDashboardStats, getAllProducts };
